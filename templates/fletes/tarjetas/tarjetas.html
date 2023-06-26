@@ -1,0 +1,56 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Tarjetas de pago {% endblock titulo %}
+{% block contenido %}
+<!-- Section -->
+<section class="listas">
+    <div class="listas_recientes">
+    <div class="encabezado_listas" id="var_encabezado"> 
+            <h2 class="titulo" id="var_titulo">Tarjetas por activar</h2>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form id="formulario_bitacora" method="post" action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+                <div class="displayTarjetas">
+                        <div class="imprimir excelButton">
+                            <input type="button" id="reporte_bitacora" value="Excel">
+                        </div>
+                </div>
+    
+                <div class="panel panel_default fontSize">
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll"> 
+                            <div class=" overflow overflow_mod_cam">
+                            <table id="tabla_fechas" class="tab_mod_camiones">
+                                <thead>
+                                    <tr>
+                                        <th>Código compañia fletera</th>
+                                        <th>Nombre compañia fletera</th>
+                                        <th>Banco</th>
+                                        <th>N° de cuenta</th>
+                                        <th>Tarjeta</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contenido_tabla_capturas">
+                                    <tr>
+                                        <td>0025</td>
+                                        <td>Francisco Lopez Cruz</td>
+                                        <td>Bancomer</td>
+                                        <td>253314512446844512321</td>
+                                        <td>3155313245365578</td>
+                                        <td>15/02/2022</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    </section>
+<!-- Section -->
+{% endblock contenido %}

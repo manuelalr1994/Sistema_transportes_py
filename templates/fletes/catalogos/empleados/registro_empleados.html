@@ -1,0 +1,312 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Empleados</h2>
+        </div>
+        <div class="var_btn">
+            <a class="btn" href="lista_empleados.html"href="../../../fletes/catalogos/empleados/lista_empleados.html">Retornar</a>
+        </div>
+    <div class="contenedorRegistro_empleados">  
+            <form>
+                <div class="foto_perfil">
+                    <img src="{% static 'img/foto_perfil.svg' %}" >
+                </div>
+                <div class="nombr_emp">
+                    <label> Codigo del empleado:</label>
+                    <input type="text" class="form_control">
+                </div>
+                <div class="panel panel_default panel_lateral">
+                    <div class="panel_heading">
+                        <h3>Datos Generales de Registro </h3>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label for="txt_nombre">Nombre completo:</label>
+                                <input type="text" maxlength="25" class="form_control" placeholder="Escriba el nombre">
+                            </div>
+                            <div class="colum_input">
+                                <label for="txt_appellido1">Primer Apellido:</label>
+                                <input type="text" maxlength="25" class="form_control" placeholder="Escriba el primer apellido">
+                            </div>
+                            <div class="colum_input">
+                                <label for="txt_appellido2">Segundo Apellido:</label>
+                                <input type="text" maxlength="25" class="form_control" placeholder="Escriba el segundo apellido"> 
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            
+                            <div class="colum_input">
+                                <label for="fecha_naci">Fecha de nacimiento:</label>
+                                <input type="date" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label for="estado_nacimiento">Estado de nacimiento</label>
+                                <select name="ddlEstado" id="ddlEstado" class="form_control">
+                                    <option value="001">AGUASCALIENTES</option>
+                                    <option value="002">BAJA CALIFORNIA</option>
+                                    <option value="003">BAJA CALIFORNIA SUR</option>
+                                    <option value="004">CAMPECHE</option>
+                                    <option value="005">COAHUILA DE ZARAGOZA</option>
+                                    <option value="006">COLIMA</option>
+                                    <option value="007">CHIAPAS</option>
+                                    <option value="008">CHIHUAHUA</option>
+                                    <option value="009">CIUDAD DE MÉXICO</option>
+                                    <option value="010">DURANGO</option>
+                                    <option value="011">GUANAJUATO</option>
+                                    <option value="012">GUERRERO</option>
+                                    <option value="013">HIDALGO</option>
+                                    <option value="014">JALISCO</option>
+                                    <option value="015">MÉXICO</option>
+                                    <option value="016">MICHOACÁN DE OCAMPO</option>
+                                    <option value="017">MORELOS</option>
+                                    <option value="018">NAYARIT</option>
+                                    <option value="019">NUEVO LEÓN</option>
+                                    <option value="020">OAXACA</option>
+                                    <option value="021">PUEBLA</option>
+                                    <option value="022">QUERÉTARO</option>
+                                    <option value="023">QUINTANA ROO</option>
+                                    <option value="024">SAN LUIS POTOSÍ</option>
+                                    <option value="025">SINALOA</option>
+                                    <option value="026">SONORA</option>
+                                    <option value="027">TABASCO</option>
+                                    <option value="028">TAMAULIPAS</option>
+                                    <option value="029">TLAXCALA</option>
+                                    <option value="030">VERACRUZ DE IGNACIO DE LA LLAVE</option>
+                                    <option value="031">YUCATÁN</option>
+                                    <option value="032">ZACATECAS</option>
+                                    <option value="033">EXTRANJERO</option>
+                                    <option selected="selected" value="000">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label for="municipio_nacimiento">Municipio de nacimiento:</label>
+                                <input type="text" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label for="nacionalidad">Nacionalidad</label>
+                                <input type="text" maxlength="50" class="form_control" placeholder="Escriba la nacionalidad">
+                            </div>
+                            <div class="colum_input">
+                                <label for="sexo">Sexo:</label>
+                                <select id="ddlSexo" class="form_control">
+                                    <option value="0">Selecciona</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="M">Masculino</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label for="discapacidad">Discapacidad:</label>
+                                <select id="ddlDiscapacidad" class="form_control">
+                                    <option value="">Selecciona</option>
+                                    <option value="">Ninguna</option>
+                                    <option value="Física">Física</option>
+                                    <option value="Motora">Motora</option>
+                                    <option value="Visual">Visual</option>
+                                    <option value="Auditiva">Auditiva</option>
+                                    <option value="Visceral">Visceral</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label for="estado_civil">Estado civil:</label>
+                                <select id="ddlEstadoCivil" class="form_control">
+                                    <option value="0">Selecciona</option>
+                                    <option value="01">Soltero (a)</option>
+                                    <option value="05">Casado (a)</option>
+                                    <option value="04">Unión libre</option>
+                                    <option value="03">Divorciado (a)</option>
+                                    <option value="02">Viudo (a)</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label for="curp">CURP:</label>
+                                <input type="text" maxlength="18" class="form_control" placeholder=" Escriba la CURP">
+                                <label for="">
+                                <input type="checkbox"> Sin CURP</label>
+                                <a href="https://www.gob.mx/curp/" target="_blank">¿No conoces tu CURP?</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h3>Datos de ingreso</h3>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input linea_sola">
+                                <label for="reingreso_emp">Reingreso:</label>
+                                <input type="date" class="form_control">
+                            </div>
+                            <div class="colum_input linea_sola">
+                                <label for="decha_alta_emp">Fecha de alta:</label>
+                                <input type="date" class="form_control">
+                            </div>
+                            <div class="colum_input linea_sola">
+                                <label for="ultimo_pago">Ultimo dia de pago:</label>
+                                <input type="date" class="form_control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos de nomina</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label  for="tip_contrato">Tipo de contrato:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="01">Permanente</option>
+                                        <option value="02">Eventual</option>
+                                    </select>
+                                </div>
+                                <div class="colum_input">
+                                    <label for="tipo_periodo">Tipo de periodo:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="03">Semanal</option>
+                                        <option value="04">Quincenal</option>
+                                    </select>
+                                </div>
+                                <div class="colum_input">
+                                        <label for="base_cotiza">Base de cotización:</label>
+                                        <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="05">Dinero</option>
+                                        <option value="06">Fijo</option>
+                                        <option value="07">Tiempos</option>
+                                        <option value="08">Horas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label for="">Salario base:</label>
+                                    <input type="number" class="form_control" >
+                                </div>
+                                <div class="colum_input">
+                                    <label for=""> Salario diario integrado:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="09">Integrado</option>
+                                        <option value="10">Sin integrar</option>
+                                    </select>
+                                </div>
+                                <div class="colum_input">
+                                    <label for="">Empresa:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="03">Videxport (Costa Hermosillo)</option>
+                                        <option value="04">Videxport (La Guacamaya Carbo) </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label for="">Departamento:</label>
+                                    <input type="text" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="">Puesto:</label>
+                                    <input type="text" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="cuadrilla">Cuadrilla o Apuntador:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="0001">Antonio Medina Santa Cruz</option>
+                                        <option value="0002">Mario Alberto Rosales (Videxport)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label for="">Numero de tarjeta:</label>
+                                    <input type="number" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="">Numero de cuenta:</label>
+                                    <input type="number" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="">Comida:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="11">Si</option>
+                                        <option value="12">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos de IMSS e INFONAVIT</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label for="numero_seguro_social">Numero de seguridad social:</label>
+                                    <input type="text" maxlength="11" class="form_control" placeholder=" Escriba el numero de seguridad social">
+                                    <a href="https://serviciosdigitales.imss.gob.mx/gestionAsegurados-web-externo/asignacionNSS;JSESSIONIDASEGEXTERNO=2oQUPTcaicZxaXOlOkwlHbHdDuvz30jPQekBuc1eZlwrjBMiWNJI!933973339" target="_blank">¿No conoces tu no. de seguridad social?</a>
+                                </div>
+                                <div class="colum_input">
+                                    <label for="UMF">Unidad Medico Familiar (UMF):</label>
+                                    <input type="text" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="INFONAVIT">INFONAVIT:</label> 
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="13">Si</option>
+                                        <option value="14">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label for="nmro_infonavit">Numero INFONAVIT:</label>
+                                    <input type="number" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="Dcnto_infonavit">Descuento INFONAVIT:</label>
+                                    <input type="number" class="form_control">
+                                </div>
+                                <div class="colum_input">
+                                    <label for="Sindicato">Sindicato:</label>
+                                    <select class="form_control">
+                                        <option selected="selected" value="000">Selecciona</option>
+                                        <option value="11">Si</option>
+                                        <option value="12">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            {%include 'home/conmon/btnGuardar.html' %}
+        </div>
+    </div>
+</section>
+<!-- Section -->
+
+<!-- Section -->
+
+{% endblock contenido %}

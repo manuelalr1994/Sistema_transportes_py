@@ -1,0 +1,290 @@
+{% extends 'home/home_facturacion.html' %}
+{% load static %}
+
+{% block titulo %} Procesar Maquila {% endblock titulo %}
+
+{% block contenido %}
+<!-- Section -->
+
+
+<!-- Modal -->
+
+<div class="modalContainer">
+    <div class="modal modal2 modalClose"> 
+        <p class="close marginClose" id="closeModal">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Generar proceso de maquila</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario">
+                                <div class="colum_input varWidth">
+                                    <label>Ubicación:</label>
+                                    <input id="campo_agricola_modal" campo_agricola="" class="form_control varDisplay modFormControl" type="text" value="Empacador staines, (monica)" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Tipo Semana:</label>
+                                    <input id="tipo_semana" tipo_semana="" class="form_control varDisplay modFormControl" type="text" value="1" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Semana:</label>
+                                    <input id="semana" semana="" class="form_control varDisplay modFormControl" type="text" value="17" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Cantidad de carros:</label>
+                                    <input id="cant_carros" class="form_control varDisplay modFormControl" type="number" value="52" disabled>
+                                </div>
+                            
+                                <div class="colum_input varWidth">
+                                    <label>Horas Fletes:</label>
+                                    <input id="hrs_fletes" class="form_control varDisplay modFormControl" type="text" value="3,1371.25" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Costo Maquila:</label>
+                                    <b class="fontSizeMid">$</b> <input id="costo_maquila" class="form_control varDisplay" type="text">
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Importe maquila:</label>
+                                    <b class="fontSizeMid">$</b> <input id="importe_maquila" class="form_control varDisplay" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botones">
+                        <input type="button" id="boton_submit" class="btn seleccion_ch save disable-select" value="Generar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<section class="listas">
+    <div class="listas_recientes">
+    <div class="encabezado_listas" id="var_encabezado"> 
+            <h2 class="titulo" id="var_titulo">Procesar maquila</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'facturacion:procesos:procesar_maquila:lista' %}">Retornar</a>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            
+            <form id="formulario_bitacora" method="post">{% csrf_token %} 
+                <div class="panel panel_default ">
+                    <div class="panel_heading">
+                        <h3>Datos de maquila</h3>
+                    </div>
+                    <div class="grupo_formulario roll">
+                        <div class="colum_input">
+                            <label><b>Ubicación:</b></label>
+                            <input type="text" id="campo_agricola" class="form_control"
+                            value="{{ campo_agricola.nombre }}" campo_agricola="{{ campo_agricola.pk }}" disabled>
+                        </div>
+                        <div class="colum_input">
+                            <label><b>Fecha de inicio:</b></label>
+                            <input id="fecha_inicio" type="date" class="form_control" required>
+                        </div>
+                        <div class="colum_input">
+                            <label><b>Fecha final:</b></label>
+                            <input id="fecha_final" type="date" class="form_control" required>
+                        </div>
+                    </div> 
+                </div>
+                <div class="panel panel_default fontSize">
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll"> 
+                            <div class="overflow_mod_cam">
+                            <table id="tabla_fechas" class="tab_mod_camiones">
+                                <thead>
+                                    <tr>
+                                        <th>N°Semana</th>
+                                        <th>Semana</th>
+                                        <th>Cantidad de carros</th>
+                                        <th>Horas Fletes</th>
+                                        <th>Costo maquila</th>
+                                        <th>Importe maquila</th>
+                                        <th>Listado</th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contenido_tabla_capturas">
+                                    <tr>
+                                        <td>15</td>
+                                        <td>17/04/2020</td>
+                                        <td>42</td>
+                                        <td>2,133.50</td>
+                                        <td>$260</td>
+                                        <td>$573,690.00</td>
+                                        <td>
+                                            <input type="button" value="Generar" class="paddingMaq colorRojo" id="abrirModal">
+                                        </td>
+                                        <td>
+                                            <input type="button" value="Concentrado" class="paddingMaq colorAzul">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>17/04/2020</td>
+                                        <td>42</td>
+                                        <td>2,133.50</td>
+                                        <td>$260</td>
+                                        <td>$573,690.00</td>
+                                        <td>
+                                            <input type="button" value="Ver" class="paddingMaq colorVerde">
+                                        </td>
+                                        <td>
+                                            <input type="button" value="Concentrado" class="paddingMaq colorGris">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    </section>
+<!-- Section -->
+
+<script src="../../../../static/js/modal.js"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+
+    $(document).ready(function(){
+
+        // VARIABLES GLOBALES
+        maquila_actual = 0
+
+        // --------------------- FILTRADO DE DATOS POR RANGO DE SEMANAS ---------------------------
+        $('#fecha_inicio, #fecha_final').change(function() {
+            var campo_agricola_id = $('#campo_agricola').attr('campo_agricola')
+            var fecha_inicio = $('#fecha_inicio').val()
+            var fecha_final = $('#fecha_final').val()
+
+            if(campo_agricola_id.length > 0 && fecha_inicio.length > 0 && fecha_final.length > 0){
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:procesar_maquila:cargarListaMaquilas' %}",
+                    data: {
+                        'campo_agricola' : campo_agricola_id,
+                        'fecha_inicio' : fecha_inicio,
+                        'fecha_final' : fecha_final
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        $('#contenido_tabla_capturas').html(data)
+                    }
+                });
+            }
+
+        });
+
+        // --------------------- DESARROLLO DE BOTONES CON SUS DATOS ------------------------------
+        let lista_abrir = document.getElementById ("contenido_tabla_capturas");
+        lista_abrir.addEventListener("click", function(e){
+            const elemento_accionado = e.target;
+
+            if (elemento_accionado.matches(".colorRojo")){
+                maquila_id = elemento_accionado.getAttribute("maquila")
+                maquila_actual = maquila_id
+
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:procesar_maquila:cargarMaquilaModal' %}",
+                    data: {
+                        'maquila':maquila_id
+                    },
+                    success: function (data) {
+                        
+                        // Mandamos los datos al Modal
+                        $("#campo_agricola_modal").prop("value", data['campo_agricola'])
+                        $("#campo_agricola_modal").attr("campo_agricola", data['campo_agricola_id'])
+                        $("#tipo_semana").prop("value", data['tipo_semana'])
+                        $("#tipo_semana").attr("tipo_semana", data['tipo_semana_id'])
+                        $("#semana").prop("value", data['semana'])
+                        $("#semana").attr("semana", data['semana_id'])
+                        $("#cant_carros").prop("value", data['cant_carros'])
+                        $("#hrs_fletes").prop("value", data['hrs_fletes'])
+
+                        // Limpiamos el costo maquila e importe maquila del Modal
+                        $('#costo_maquila').prop('value', '')
+                        $('#importe_maquila').prop('value', '')
+
+                    }
+                });
+
+            }
+
+        });
+
+        // --------------------- FUNCIONAMIENTO DE MODAL PROCESAMIENTO ----------------------------
+        $("#costo_maquila").change(function(){
+            importe_maquila = (parseFloat($("#costo_maquila").val()) * parseFloat($("#hrs_fletes").val())).toFixed(2)
+            $("#importe_maquila").prop("value", importe_maquila)
+        })
+
+        $("#boton_submit").click(function(){
+            maquila_id = maquila_actual
+            campo_agricola = $('#campo_agricola_modal').attr('campo_agricola')
+            semana = $('#semana').attr('semana')
+            tipo_semana = $('#tipo_semana').attr('tipo_semana')
+            cant_carros = $('#cant_carros').val()
+            hrs_fletes = $('#hrs_fletes').val()
+            costo_maquila = $('#costo_maquila').val()
+            importe_maquila = $('#importe_maquila').val()
+
+            if(maquila_id.length > 0 && costo_maquila.length > 0 && importe_maquila.length > 0 && campo_agricola.length > 0
+            && semana.length > 0 && tipo_semana.length > 0 && cant_carros.length > 0 && hrs_fletes.length > 0){
+                url_redirect = "{% url 'facturacion:procesos:procesar_maquila:registrar' %}" + "?campo_agricola="+campo_agricola
+                console.log('entre antes del AJAX')
+
+                $.ajax({
+                    url: "{% url 'facturacion:procesos:procesar_maquila:registrar' %}",
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'maquila_id': maquila_id,
+                        'campo_agricola': campo_agricola,
+                        'semana': semana,
+                        'tipo_semana': tipo_semana,
+                        'cant_carros': cant_carros,
+                        'hrs_fletes': hrs_fletes,
+                        'costo_maquila': costo_maquila,
+                        'importe_maquila': importe_maquila,
+                        'procesada': true,
+                    },
+                    success: function (data) { 
+                        console.log('entre al success')
+                        if (data['exitoso']){
+                            console.log('si entre a exitoso mi rey')
+                            window.location.href=window.location.href;
+                        }
+                        else {
+                            console.log('entre al error de success')
+                            $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                        }
+                    },
+                    error: function(jqXHR, estado, error) {
+                        console.log('entre al error')
+                        $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                    }
+                });
+
+            }
+
+
+        })
+
+    })
+    
+
+
+</script>
+{% endblock contenido %}

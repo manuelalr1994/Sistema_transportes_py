@@ -1,0 +1,86 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% load i18n %}
+{% block titulo %} Registro de camiones {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Camiones</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:camiones:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">  
+            <div class="contenedorRegistro_empleados">
+                <div class="panel panel_default">
+                    <form method="POST">{% csrf_token %}
+                        <div class="panel panel_default">
+                            <div class="panel_heading">
+                                <h3>Datos del empleado</h3>
+                            </div>
+                        </div>
+                        <div class="panel_body" id="formulario">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo</label>
+                                    {{ form.codigo }}
+                                </div>
+                                <div class="colum_input" id="grupoNombre">
+                                    <label>Nombre del Camion</label>
+                                    {{ form.nombre }}
+                                    <span class="ponerRojo">El nombre debe tener de 3 a 35 caracteres y no debe de contener numeros</span>
+                                </div>
+                                <div class="colum_input" id="grupoAlias">
+                                    <label>Alias</label>
+                                    {{ form.alias }}
+                                    <span class="quitarRojo ponerRojo">El alias de tener de 4 a 35 caracteres y no debe de contener numeros</span>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input" >
+                                    <label>Compañia Fletera</label>
+                                    {{ form.compania_fletera }}
+                                </div>
+                                <div class="colum_input" id="grupoHora">
+                                    <label>Costo por hora</label>
+                                    {{ form.costo_hra }}
+                                    <span class="ponerRojo">El campo debe de tener de 1 a 4 dígitos y dos decimales</span>
+                                </div>
+                                <v-button>
+                                    <v-alert></v-alert>
+                                </v-button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    {%include 'home/conmon/btnGuardar.html' %}
+                    {%include 'home/conmon/btnConsultar.html' %}
+                </form>
+                {% if form.errors %}
+
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <label> ({{ field.label }})  {% trans error|escape %} </label>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <label> {% trans error|escape %} </label>
+                    {% endfor %}
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src={% static 'js/fletes/registroFletes.js' %}></script>
+<!-- Section -->
+
+{% endblock contenido %}

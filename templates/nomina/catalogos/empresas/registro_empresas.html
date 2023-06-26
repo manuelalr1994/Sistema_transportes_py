@@ -1,0 +1,111 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Registro de empresas {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Empresas</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'nomina:catalogos:empresas:lista' %}">Retornar</a>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form method='POST'> {% csrf_token %}
+                <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos de la empresa</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo</label>
+                                    {{ form.codigo }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre</label>
+                                    {{ form.nombre }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Dirección</label>
+                                    {{ form.direccion }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Estado</label>
+                                    {{ form.estado }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Colonia</label>
+                                    {{ form.colonia }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Ciudad</label>
+                                    {{ form.ciudad }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>C.P.</label>
+                                    {{ form.cp }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>R.F.C.</label>
+                                    {{ form.rfc }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {%include 'home/conmon/btnGuardar.html' %}
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+
+{% endblock contenido %}
+
+<!-------------------------------------------Javascript----------------------------------------------->
+
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script>
+        
+            function toTablaTipos(string){
+                string = string.split(' ')
+                string[1] = ' - '
+                string[0][0][0] = string[0][0][0].toUpperCase()
+                string[2][0][0] = string[2][0][0].toUpperCase()
+
+                console.log(string[2][0][0])
+            
+                return string[0]+string[1]+string[2]
+            
+            }
+            
+            $(document).ready(function() {
+            
+                html = ""
+            
+                diccionario_tipos = {
+                    {% for key,value in diccionario_tipo_semanas.items %}
+                        {{ key }} : '{{ value }}',
+                    {% endfor %}
+                }
+            
+                for (tipo in diccionario_tipos){
+                    html = "<p>"+html+'SEMANA '+String(tipo)+': '+toTablaTipos(diccionario_tipos[tipo])+"</p>\n"
+                }
+
+                console.log(html)
+            
+                $('#tabla_tipos').html(html)
+
+            });
+            
+        </script>

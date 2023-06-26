@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas ALM</title>
+    <link rel="preload" href="../../CSS/normalize.css" as="style">
+    <link rel="stylesheet" href="../../CSS/normalize.css">
+    <link rel="preload" href="../../CSS/styles.css" as="style">
+    <link href="../../CSS/styles.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="porcentaje">
+    <header class="nav-principal">
+        <nav class="menu">
+            <div class=""></div>
+                <ul>
+                    <li>
+                        <a href="../../menu.html"></a>
+                    </li>
+                    <li class="catalogs">
+                        <a href="#">Catalogos</a>
+                        <ul class="barra_desplegable">
+                            <li><a href="../catalogos/camiones/listado_camiones.html">Camiones</a></li>
+                            <li><a href="../catalogos/campos_agricolas/lista_campos.html">Campos Agricolas</a></li>
+                            <li><a href="../catalogos/compania_fletera/listado_compania_fletera.html">Compañia fletera</a></li>
+                            <li><a href="../catalogos/cuadrilleros/cuadrilleros.html">Cuadrilleros</a></li>
+                            <li><a href="../catalogos/cultivos/lista_cultivos.html">Cultivos</a></li>
+                            <li><a href="../catalogos/empleados/lista_empleados.html">Empleados</a></li>
+                            <li><a href="../catalogos/empresas/empresas.html">Empresas</a></li>
+                            <li><a href="../catalogos/labores/lista_labores.html">Labores</a></li>
+                            <li><a href="../catalogos/semanas/lista_semanas.html">Semanas</a></li>
+                            <li><a href="../catalogos/ubicaciones/lista_ubicaciones.html">Ubicaciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="process"><a href="#">Procesos</a>
+                        <ul class="barra_desplegable">
+                            <li><a href="Procesos/capturas_jornales.html">Capturas Jornales</a></li>
+                            <li><a href="empresas.html">Modificaciones Jornales</a></li>
+                        </ul>
+                    </li>
+                    <li class="queries">
+                        <a href="#">Consultas</a>
+                    </li>
+                    <li class="report">
+                        <a href="#">Reportes</a>
+                    </li>
+                    <li class="tarjet">
+                        <a href="#">Tarjetas</a>
+                    </li>
+                    <li class="props">
+                        <a href="#">Utilerias</a>
+                    </li>
+                    <li  class="fletes_select" id="selected">
+                        <a href="#">Fletes</a>
+                        <ul class="barra_desplegable">
+                            <li><a href="../../inicio.html">Nómina</a></li>
+                            <li><a href="empresas.html">Flotillas</a></li>
+                            <li><a href="empresas.html">Facturacion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+        </nav>
+            <div class="nomin">
+    
+            </div>
+    </header>
+
+    <main> 
+        <section class="main_lateral activate" id="bar_lado">
+            <h3 class="observaciones">Observaciones</h3>
+                <div class="flecha active" id="toggle">
+                    <img src="../../img/Iconos/flecha.svg">
+                </div>
+                <div class="img_calendario">
+                    <img src="../../img/Iconos/calenadrio_white.svg">
+                </div>
+                <div class="overflow_lateral">
+                    <table class="tabla_lateral">
+                        <caption>SEMANAS CERRADAS</caption>
+                            <tr>
+                                <th id="tab_main">Semana tipo 1</th>
+                            </tr>
+                            <tr>
+                                <th>Lunes a domingo</th>
+                            </tr>
+                            <tr>
+                                <th id="tab_main">Semana 15</th>
+                            </tr>
+                            <tr>
+                                <td>01/10/2022 - 07/10/2022</td>
+                            </tr>
+                            <tr>
+                                <th>Costa Hillo</th>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <th>Guaymas</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Carbo</tdh>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                        <table class="tabla_lateral espacio">
+                            <tr>
+                                <th class="separador_lateral" id="tab_main">Semana tipo 2</th>
+                            </tr>
+                            <tr>
+                                <th>Domingo a Sabado</th>
+                            </tr>
+                            <tr>
+                                <th id="tab_main">Semana 14</th>
+                            </tr>
+                            <tr>
+                                <td>11/10/2022 - 17/10/2022</td>
+                            </tr>
+                            <tr>
+                                <th>Costa Hillo</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Guaymas</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Carbo</tdh>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                        <table class="tabla_lateral espacio">
+                            <tr>
+                                <th class="separador_lateral" id="tab_main">Semana tipo 3</th>
+                            </tr>
+                            <tr>
+                                <th>Domingo a Sabado</th>
+                            </tr>
+                            <tr>
+                                <th id="tab_main">Semana 14</th>
+                            </tr>
+                            <tr>
+                                <td>11/10/2022 - 17/10/2022</td>
+                            </tr>
+                            <tr>
+                                <th>Costa Hillo</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Guaymas</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Carbo</tdh>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                        <table class="tabla_lateral espacio tab_flet">
+                            <tr>
+                                <th class="separador_lateral" id="tab_main">Carros trabajando </th>
+                                <td>15</td>
+                            </tr>
+                        </table>
+                </div>
+                 <h4 class="posicion">COSTA HERMOSILLO</h4>
+            <input class="btn_bar" type="submit" value="Enviar →">
+        </section>
+    </main>
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Modificacion de camiones</h2>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form>
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h2>Datos del camion</h2>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Codigo del camion:</label>
+                                <input class="form_control" type="text">
+                            </div>
+                            <div class="colum_input">
+                                <label>Camion:</label>
+                                <input class="form_control" type="text">
+                            </div>
+                            <div class="colum_input">
+                                <label>Tipo de semana:</label>
+                                <select class="form_control" id="tipo" xl>
+                                    <option value="1" selected="selected">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label id="nombre_tipo">Fecha:</label>
+                                <input type="text" class="form_control" > 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel panel_default">
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll"> 
+                            <div class=" overflow overflow_mod_cam">
+                            <table id="tabla_fechas" class="tab_mod_camiones">
+                                <thead class="thead_registro_sem">
+                                    <tr>
+                                        <th>Falta</th>
+                                        <th>Justificante</th>
+                                        <th>Dia</th>
+                                        <th>Empresa</th>
+                                        <th>Cuadrillero</th>
+                                        <th>Plantacion</th>
+                                        <th>Variedad</th>
+                                        <th>Labor</th>
+                                        <th>Fecha</th>
+                                        <th>Entrada</th>
+                                        <th>Salida</th>
+                                        <th>Horas</th>
+                                        <th>Importe</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="checkbox"></td>
+                                        <td> 12/05/2021 </td>
+                                        <td>Jesus Perez</td>
+                                        <td>Roberto Perez</td>
+                                        <td>15</td>
+                                        <td>03</td>
+                                        <td>015</td>
+                                        <td>12/05/2020</td>
+                                        <td>9:00</td>
+                                        <td>17:00</td>
+                                        <td>8</td>
+                                        <td>1350</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="botones_mod_camiones">
+                            <a class="btn_green" href="#">Guardar</a>
+                            <a class="btn_red">Eliminar</a>
+                            <a class="btn" href="#">Editar</a>
+                            <a class="btn">Reiniciar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Section -->
+
+    <div class="caja_img_fondo">
+        <img src="../../img/GSMO2.png" class="img_fondo">
+    </div>
+    <script src="../../js/main.js"></script>
+</body>

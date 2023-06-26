@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %} Inicio fletes {% endblock titulo %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preload" href={% static "css/normalize.css" %} as="style">
+    <link rel="stylesheet" href={% static "css/normalize.css" %}>
+    <link rel="preload" href={% static "css/styles.css" %} as="style">
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;800&family=Open+Sans:ital,wght@0,600;0,700;0,800;1,300&display=swap');
+    </style>
+</head>
+
+<body class="porcentaje">
+    <header class="nav-principal">
+        <nav class="menu">
+            <ul>
+                <li></li>
+                {% if request.user.permisos_facturacion %}
+                <li>
+                    <a href="{% url 'facturacion:home' %}">Volver al inicio</a>
+                </li>
+                {% endif %}
+                {% if request.user.permisos_fletes %}
+                <li>
+                    <a href="{% url 'fletes:home' %}">Volver al inicio</a>
+                </li>
+                {% endif %}
+                {% if request.user.permisos_nomina %}
+                <li>
+                    <a href="{% url 'nomina:home' %}">Volver al inicio</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div>
+
+        </div>
+    </header>
+
+    <main>
+        <section class="main_lateral activate" id="bar_lado">
+            <h3 class="observaciones">Observaciones</h3>
+            <div class="flecha active" id="toggle">
+                <img src={% static "img/Iconos/flecha.svg" %}>
+            </div>
+            <div class="img_calendario">
+                <img src={% static 'img/Iconos/calendario_white.svg' %}>
+            </div>
+            <h3 class="observaciones">SEMANAS CERRADAS</h3>
+            <div class="overflow_lateral">
+                <table class="tabla_lateral">
+                    <tr>
+                        <th id="tab_main">Semana tipo 1</th>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Lunes a domingo</th>
+                    </tr>
+                    <tr>
+                        <th id="tab_main">Semana 15</th>
+                    </tr>
+                    <tr>
+                        <td>01/10/2022 - 07/10/2022</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Costa Hermosillo</th>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Guaymas</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Carbo</th>
+                        <td>0</td>
+                    </tr>
+                </table>
+                <table class="tabla_lateral espacio">
+                    <tr>
+                        <th class="separador_lateral" id="tab_main">Semana tipo 2</th>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Domingo a Sábado</th>
+                    </tr>
+                    <tr>
+                        <th id="tab_main">Semana 14</th>
+                    </tr>
+                    <tr>
+                        <td>11/10/2022 - 17/10/2022</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Costa Hermosillo</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Guaymas</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Carbo</tdh>
+                        <td>0</td>
+                    </tr>
+                </table>
+                <table class="tabla_lateral espacio">
+                    <tr>
+                        <th class="separador_lateral" id="tab_main">Semana tipo 3</th>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Domingo a Sábado</th>
+                    </tr>
+                    <tr>
+                        <th id="tab_main">Semana 14</th>
+                    </tr>
+                    <tr>
+                        <td>11/10/2022 - 17/10/2022</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Costa Hermosillo</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Guaymas</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th class="var_color_tab">Carbo</tdh>
+                        <td>0</td>
+                    </tr>
+                </table>
+            </div>
+            <table class="tabla_lateral espacio tab_flet">
+                <tr>
+                    <th class="separador_lateral" id="tab_main">Carros trabajando </th>
+                    <td>15</td>
+                </tr>
+            </table>
+            <h4 class="posicion disable-select">HERMOSILLO</h4>
+        </section>
+    </main>
+    {% block contenido %}
+    <!-- Section -->
+
+
+    <!-- Section -->
+    {% endblock contenido %}
+
+    <div class="caja_img_fondo">
+        <img src={% static 'img/GSMO2.png' %} class="img_fondo">
+    </div>
+    <script " src={% static 'js/main.js' %} "></script>
+</body>

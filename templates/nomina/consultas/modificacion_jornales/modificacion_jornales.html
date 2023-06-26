@@ -1,0 +1,206 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Modificación de jornales {% endblock titulo %}
+{% block contenido %}
+<!-- Modal de Modificacion -->
+
+<div class="modalContainer">
+    <div class="modal modalClose"> 
+        <p class="close" id="closeModal">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Modificación</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo:</label>
+                                    <input id="codigo_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Camion:</label>
+                                    <input id="nombre_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Tipo de semana:</label>
+                                    <input valor="" id="tipo_semana_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>N° semana:</label>
+                                    <input id="numero_semana_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Costo Hora:</label>
+                                    <input id="costo_hra_camion" class="form_control" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel_default">
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll"> 
+                                <div class="overflow_modal">
+                                <table id="tabla_fechas" class="tab_mod_modal">
+                                    <thead class="thead_registro colorModal">
+                                        <tr>
+                                            <th>Dia</th>
+                                            <th>Campo Agricola</th>
+                                            <th>Cuadrillero</th>
+                                            <th>Plantacion</th>
+                                            <th>Variedad</th>
+                                            <th>Labor</th>
+                                            <th>Fecha</th>
+                                            <th>Entrada</th>
+                                            <th>Salida</th>
+                                            <th>Horas</th>
+                                            <th>Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in dias_semana %}
+                                        <tr>
+                                            <td> <input type="text" id="dia_{{ i }}" fila="{{ i }}" id_captura="" id_camion="" disabled></td>
+                                            <td><select id="campo_agricola_{{ i }}" fila="{{ i }}" disabled> 
+                                            </select></td>
+                                            <td><select id="cuadrillero_{{ i }}" fila="{{ i }}" tipo="cuadrillero"> 
+                                            </select></td>
+                                            <td><select id="plantacion_{{ i }}" fila="{{ i }}"> 
+                                            </select></td>
+                                            <td><select id="variedad_{{ i }}" fila="{{ i }}" tipo="variedad"> 
+                                            </select></td>
+                                            <td><select id="labor_{{ i }}" fila="{{ i }}"> 
+                                            </select></td>
+                                            <td> <input type="text" id="fecha_{{ i }}" fila="{{ i }}" disabled> </td>
+                                            <td> <input type="number" step="0.1" id="hora_entrada_{{ i }}" fila="{{ i }}" min="0" max="24"> </td>
+                                            <td> <input type="number" step="0.1" id="hora_salida_{{ i }}" fila="{{ i }}" min="0" max="24" > </td>
+                                            <td> <input type="number" step="0.1" id="total_hrs_{{ i }}" fila="{{ i }}" disabled> </td>
+                                            <td> <input type="number" step="0.1" id="importe_{{ i }}" fila="{{ i }}" disabled> </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div id="botones" class="botones">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pagina de listas e impresion -->
+
+<section class="listas">
+<div class="listas_recientes">
+<div class="encabezado_listas" id="var_encabezado"> 
+        <h2 class="titulo" id="var_titulo">Listado semanal de camiones</h2>
+    </div>
+    <div class="contenedorRegistro_empleados">
+        <form id="formulario_bitacora" method="post" action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+            <div class="panel panel_default panelModCamiones">
+                <div class="modCamiones">
+                    <b>Campo Agricola:</b>{{ form.campo_agricola }}
+                    <b>Tipo Semana:</b> <select name="tipo_semana" id="tipo_semana" class="form_control" required>
+                        <option value="">---selecciona tipo semana---</option>
+                    </select>
+                </div>
+                <div class="modCamiones">
+                    
+                    <b>Semana:</b> <select name="semana" id="semana" class="form_control elementoUno" required>
+                        <option value="">---selecciona semana---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="containerImprimir">
+                    <div class="checkboxImprimir marginArriba">
+                    <label>Seleccionar todos:</label>
+                        <input type="checkbox" id="selectAll" onclick='checkUncheck(this)'>
+                    </div>
+                    <div class="imprimirMod colorImprimirVar">
+                        <input type="button" id="reporte_bitacora" value="Imprimir bitácora">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel_default fontSize">
+                <div class="panel_body">
+                    <div class="grupo_formulario roll"> 
+                        <div class="overflow_mod_cam">
+                        <table id="tabla_fechas" class="tab_mod_camiones">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Horas</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Sub Total</th>
+                                    <th>Diésel</th>
+                                    <th>Comidas</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th>Ver</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contenido_tabla_capturas">
+                                <tr>
+                                    <td>00102</td>
+                                    <td>Internacional blanco</td>
+                                    <td>54.25</td>
+                                    <td>9.25</td>
+                                    <td>8.25</td>
+                                    <td>6.00</td>
+                                    <td>8.75</td>
+                                    <td>8.75</td>
+                                    <td>6.50</td>
+                                    <td>6.75</td>
+                                    <td>8,951.25</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>8,951.25</td>
+                                    <td><input type="checkbox" name="lang" id="seleccionImprimir" ></td>
+                                    <td>
+                                        <input class="inputMod imgVer" type="button" >
+                                    </td>
+                                    <td>
+                                        <input class="inputMod imgEditar" type="button">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="error"></div>
+    </div>
+</div>
+</section>
+
+
+
+<!------------------ JAVASCRIPT --------------------->
+
+<script src="../../../../static/js/modal.js"></script>
+<script src="../../../../static/js/funciones.js"></script>
+<script src="{% static 'js/decimal.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+{% endblock contenido %}

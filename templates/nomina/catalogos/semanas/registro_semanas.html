@@ -1,0 +1,194 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Registro de semanas {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Semanas</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'nomina:catalogos:semanas:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">
+        <div class="contenedorRegistro_empleados">
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h2>Generador de semanas</h2>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label id="nombre_tipo">Dias:</label>
+                            </div>
+                            <div class="colum_input">
+                                <label>Tipo de semana: </label> 
+                                    <select class="form_control" id="tipo">
+                                        <option value="1" selected="selected">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                    </select>
+                            </div>
+                            <div class="colum_input">
+                                <label>Fecha Inicial:</label>
+                                <input class="form_control" id='fecha_inicial' type="date">
+                                <button class= "btn add" id="desplegar_semanas"><b>Generar</b>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <form method="POST">{% csrf_token %} 
+                                <table id="tabla_fechas" class="tabla_listas_sem">
+                                    <thead class="thead_registro_sem">
+                                        <tr>
+                                            <th>Numero de Semana</th>
+                                            <th>Fecha de Inicio</th>
+                                            <th>Fecha Finalizada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="date" value="03/01/2022" disabled ></td>
+                                            <td>03/01/2022</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%include 'home/conmon/btnGuardar.html' %}
+                <label id="error" ></label>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<!-- >-------------------------------------JAVASCRIPT----------------------------------------------<-->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+
+    // Funciones de Javascript
+    function generador_semanas(fecha_inicial){
+    
+        var lista_semanas = [];
+        var par_semana = [];
+        var par_semana_tipo = [];
+
+        for(i = 1; i <= 52; i++){
+            fecha_final = new Date(fecha_inicial.getTime() + 6*1000*60*60*24);
+            par_semana.push(fecha_inicial);
+            par_semana.push(fecha_final);
+            par_semana_tipo.push(i);
+            par_semana_tipo.push(par_semana);
+            lista_semanas.push(par_semana_tipo);
+            par_semana = [];
+            par_semana_tipo = [];
+            fecha_inicial = new Date(fecha_final.getTime() + 1*1000*60*60*24)
+        }
+    
+        return lista_semanas;
+    
+    };
+
+    function formateador_semanas(fecha){
+        fecha_formateada = fecha.getDate()+'/'+(fecha.getMonth()+1)+'/'+fecha.getFullYear();
+        return fecha_formateada;
+    };
+
+    function extraer_lista(name){
+        console.log('estoy en extraer lista')
+        var lista_extraida = [];
+        $("[name='"+ name +"']").each(function(i){
+            elemento = $(this).val()
+            lista_extraida.push(elemento)
+        });
+        return lista_extraida;
+    };
+
+    // Despliegue con JQuery
+    $(document).ready(function() {
+
+        $('#fecha_inicial').change(function() {
+            $('#desplegar_semanas').click(function() {
+                console.log('estoy en desplegar semanas pah')
+                var fecha = $('#fecha_inicial').val().split('-');
+                fecha = new Date(fecha[0], parseInt(fecha[1]-1), fecha[2]);
+                var lista_semanas = generador_semanas(fecha);
+                var html_lista_semanas = "<thead>\n<tr>\n<th>Numero de Semana</th>\n<th>Fecha de Inicio</th>\n<th>Fecha Finalizada</th>\n</tr>\</thead>";
+                var html_fecha = "";
+                for (par_semanas of lista_semanas){
+                    html_fecha = '<tr><td><input name="lista_id" type="text" value="'+ par_semanas[0] +'" disabled ></td>\n<td><input name="lista_fecha_inicial" type="text" value="'+ formateador_semanas(par_semanas[1][0]) +'" disabled ></td>\n<td><input name="lista_fecha_final" type="text" value="'+ formateador_semanas(par_semanas[1][1]) +'" disabled ></td></tr>\n';
+                    html_lista_semanas = html_lista_semanas + html_fecha;
+                }
+
+                $('#tabla_fechas').html(html_lista_semanas);
+                $('#boton_submit').html('<input class="btn_green" value="Guardar" type="button" class="btn">');
+
+            });
+        });
+
+        $('#tipo').change(function() {
+            diccionario_tipos = {
+                {% for key,value in diccionario_tipos.items %}
+                    '{{ key }}' : '{{ value }}',
+                {% endfor %}
+            }
+
+            var tipo = $('#tipo').attr('value')
+
+            if (typeof(tipo) !== "undefined"){
+                $('#nombre_tipo').html('<p>'+ diccionario_tipos[tipo] +'</p>')
+            }
+
+        });
+
+        $('#boton_submit').click(function() {
+
+            var url = '{% url "fletes:catalogos:semanas:registrar" %}';
+            var url_redirect = '{% url "nomina:catalogos:semanas:lista" %}';
+            var lista_id = extraer_lista('lista_id');
+            var lista_fecha_inicial = extraer_lista('lista_fecha_inicial');
+            var lista_fecha_final = extraer_lista('lista_fecha_final');
+            var tipo = parseInt($("#tipo").val());
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'lista_fecha_inicial': lista_fecha_inicial,
+                    'lista_fecha_final': lista_fecha_final,
+                    'lista_id': lista_id,
+                    'tipo' : tipo
+                },
+                success: function (data) { 
+                    console.log('modo sexo')
+                    if (data['exitoso']){
+                        window.location = url_redirect
+                    }
+                    else {
+                        $("#error").html(data['error']);
+                    }
+                },
+                error: function(jqXHR, estado, error) {
+                    console.log('modo sexo 2')
+                    $("#error").html('<label style="color: red;">Hubo un error en el servidor</label>');
+                }
+            });
+
+        });
+
+    });
+</script>
+
+{% endblock contenido %}

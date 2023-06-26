@@ -1,0 +1,4 @@
+<option value="">---selecciona tipo semana---</option>
+{% for tipo_semana in tipos_semana %}
+<option value="{{ tipo_semana.pk }}">{{ tipo_semana }}</option>
+{% endfor %}

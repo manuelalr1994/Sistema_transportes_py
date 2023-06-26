@@ -1,0 +1,51 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Consulta de cuadrilla/apuntador {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Consulta de Cuadrilla/Apuntador</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:cuadrilleros:lista' %}">Retornar</a>
+        </div>
+            <!-- <a class="btn_red" onclick='location.href="{% url "fletes:catalogos:cuadrilleros:actualizar" pk=pk %}"'>Editar</a> -->
+            <!-- <a class="btn_red" onclick='location.href="{% url "fletes:catalogos:cuadrilleros:eliminar" pk=pk %}"'>Eliminar</a> -->
+        <div class="overflow"> 
+            <div class="contenedorRegistro_empleados">
+                <form action="POST">{% csrf_token %}
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos de la cuadrilla</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo</label>
+                                    <input class="form_control" type="text" disabled value="{{ object.codigo }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre</label>
+                                    <input class="form_control" type="text" disabled value="{{ object.nombre }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Campo Agricola</label>
+                                    <input class="form_control" type="text" disabled value="{{ object.campo_agricola }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {%include 'home/conmon/btnMasEditar.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+
+{% endblock contenido %}

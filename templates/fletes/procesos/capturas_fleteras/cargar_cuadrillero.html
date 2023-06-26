@@ -1,0 +1,4 @@
+<option value="">---selecciona cuadrillero---</option>
+{% for cuadrillero in cuadrilleros %}
+<option value="{{ cuadrillero.pk }}">{{ cuadrillero }}</option>
+{% endfor %}

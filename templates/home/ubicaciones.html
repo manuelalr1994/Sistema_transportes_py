@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href={% static "css/stylesModulos.css" %} as="style">
+    <link rel="stylesheet" href={% static "css/stylesModulos.css" %}>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;800&family=Open+Sans:ital,wght@0,600;0,700;0,800;1,300&display=swap');
+    </style>
+</head>
+
+<body class="MenuPrincipal">
+    <aside>
+        <div class="imageCows rulesImages"></div>
+        <div class="imageLivestock rulesImages"></div>
+    </aside>
+    <nav class="firstMenu">
+        <ul>
+            <!-- {% for ubicacion in request.user.permisos_ubicaciones.all %}
+            <li class="activeMenu imgUbicacion">
+                <a href="{% url 'home:home_modulos' %}?ubicacion_usuario={{ ubicacion.pk }}">{{ ubicacion.nombre }}</a>
+            </li>
+            {% endfor %} -->
+            <li class="iconsMenu imgUbicacion">
+                <a ubicacion="Hermosillo" href="{% url 'home:home_modulos' %}?ubicacion_usuario=1">Hermosillo</a>
+            </li>
+            <li class="iconsMenu imgUbicacion">
+                <a ubicacion="Guaymas" href="{% url 'home:home_modulos' %}?ubicacion_usuario=2">Guaymas</a>
+            </li>
+            <li class="iconsMenu imgUbicacion">
+                <a ubicacion="Carbo" href="{% url 'home:home_modulos' %}?ubicacion_usuario=3">Carbo</a>
+            </li>
+            <li class="iconsMenu imgAtras">
+                <a href="#" onclick="location.href='{% url 'users_app:user_logout' %}'">Salir</a>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        <div class="sectionMenu">
+            <div class="menuJc containerMenuJc">
+                <div class="moduloName">
+                    <h3>Selección de <span class="coloring">ubicaciones</span></h3>
+                    <span class="subTextMenu">Transportes <span class="coloring">GSMO</span></span>
+                    <!-- <div class="posicionMenu colorBotonMenu">
+                        <a href="templates/modulo 1/catalogos.html">Entrar al modulo</a>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

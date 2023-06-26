@@ -1,0 +1,56 @@
+{% extends 'users/base_users.html' %}
+{% load static %}
+{% block titulo %} Actualizar contraseña {% endblock titulo %}
+{% block contenido %}
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Actualizar Contraseña</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'users_app:user_panel' %}">Retornar</a>
+        </div>
+            <div class="contenedorRegistro_empleados">
+                <form method='POST'> {% csrf_token %}
+                    <div class="panel panel_default">
+                            <div class="panel_heading">
+                                <h3>Actualizar Contraseña</h3>
+                            </div>
+                            <div class="panel_body">
+                                <div class="grupo_formulario roll">
+                                    <div class="colum_input">
+                                        <label>Contraseña Actual</label>
+                                        {{ form.password1 }}
+                                    </div>
+                                    <div class="colum_input">
+                                        <label>Contraseña Nueva</label>
+                                        {{ form.password2 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botones">
+                            <input type="submit" class="btn seleccion save disable-select" value="Guardar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</select>
+
+
+
+
+<!-- <h1 style="margin-top: 5rem; margin-left: 15rem;">Cambiar Contraseña</h1>
+<div>
+    <h2  style="margin-top: 10rem; margin-bottom: 1rem;">Bienvenido: {{user}}</h2>
+    <form action="" method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button style="margin-top: 20px;" type="submit">Guardar</button>
+        <button onclick="location.href='{% url 'users_app:user_panel' %}'">Regresar</button>
+    </form>
+</div> -->
+
+{% endblock contenido %}

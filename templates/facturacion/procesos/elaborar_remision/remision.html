@@ -1,0 +1,80 @@
+{% extends 'home/home_facturacion.html' %}
+{% load static %}
+
+{% block titulo %} Lista remisión{% endblock titulo %}
+
+{% block contenido %}
+
+
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas disable-select">
+            <section class="ubicacion">
+                <div>
+                    <label>Hermosillo</label>
+                </div>
+            </section>
+            <h2 class="titulo">lista de remisiones</h2>
+            <div class="seleccion_ch" style="visibility: hidden; opacity: 0;">
+                <a href="#" class="btn seleccion_ch add disable-select">Agregar</a>
+            </div>
+        </div>
+        {%include 'home/conmon/checkBox.html' %}
+        <div class="overflow">
+            <table class="tabla_listas_ch">
+                <thead>
+                    <tr>
+                        <th>Campo agrícola</th>
+                        <th>ubicación</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla_campos_agricolas" class="div_tabla_empresas">
+                    {% for campo_agricola in lista_campos_agricola %}
+                    <tr>
+                        <td>{{ campo_agricola.nombre }}</td>
+                        <td>{{ campo_agricola.ubicacion }}</td>
+                        <td>
+                            <input 
+                            class="inputMod" 
+                            type="button"
+                            value="Estado de cuenta"
+                            id="ver_listado"
+                            style="background-color: green; text-align: center;  width: 118px;"
+                            campo_agricola="{{ campo_agricola.pk }}"
+                            >
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    // FUNCIOANMIENTO DE LOS BOTONES
+    let lista_abrir = document.getElementById("tabla_campos_agricolas");
+        lista_abrir.addEventListener("click", function(e){
+            const elemento_accionado = e.target;
+
+            // Para el funcionamiento de botones de estado de cuenta a traves de su clase inputMod
+            if (elemento_accionado.matches(".inputMod")){
+                campo_agricola = elemento_accionado.getAttribute("campo_agricola")
+                tipo_semana = elemento_accionado.getAttribute("tipo_semana")
+                semana = elemento_accionado.getAttribute("semana")
+                window.location = "{% url 'facturacion:procesos:elaborar_remision:estadoCuentaRemision'%}"+"?campo_agricola="+campo_agricola
+
+            }
+
+        });
+
+</script>
+
+
+{% endblock contenido %}

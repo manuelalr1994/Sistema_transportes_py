@@ -1,0 +1,227 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Registro de empleados {% endblock titulo %}
+{% block contenido %}
+{% load i18n %}
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Empleados</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select"
+                href="{% url 'nomina:catalogos:empleados:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">
+            <div class="contenedorRegistro_empleados">
+                <div class="panel panel_default">
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos del Empleado</h3>
+                        </div>
+                    </div>
+
+                    <form method="POST"> {% csrf_token %}
+                        <div class="panel_body" id="formulario">
+                            <div class="cuadroFoto">
+                                <p></p>
+                            </div>
+                            <div class="grupo_formulario roll marginPerfil">
+                                <div class="colum_input" style="background: #c7cddd; border-radius: 8px;" id="grupoCodEmpleado">
+                                    <label>Codigo del trabajador</label>
+                                    {{ form.codigo }}
+                                    <span class="ponerRojo">Se esperan 8 digitos</span>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Fecha de alta</label>
+                                    {{ form.fecha_alta }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Tipo de contrato</label>
+                                    {{ form.tipo_contrato }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll marginPerfil">
+                                <div class="colum_input widthEmp" id="grupoTar">
+                                    <label>Numero de tarjeta</label>
+                                    {{ form.num_tarjeta }}
+                                    <span class="ponerRojo">Se esperan 16 dígitos</span>
+                                </div>
+                                <div class="colum_input widthEmp" id="grupoCuenta">
+                                    <label>Cuenta de banco</label>
+                                    {{ form.cuenta_banco }}
+                                    <span class="ponerRojo">Se esperan 10 dígitos</span>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll" style="background-color: #c7cddd; border-radius: 8px;">
+                                <div class="colum_input" id="grupoApellido_p">
+                                    <label>Apellido paterno</label>
+                                    {{ form.paterno }}
+                                    <span class="ponerRojo">El apellido debe tener de 3 a 35 caracteres y no debe de contener números</span>
+                                </div>
+                                <div class="colum_input" id="grupoApellido_m">
+                                    <label>Apellido materno</label>
+                                    {{ form.materno }}
+                                    <span class="ponerRojo">El apellido debe tener de 3 a 35 caracteres y no debe de contener números</span>
+                                </div>
+                                <div class="colum_input" id="grupoNombre">
+                                    <label>Nombre(s)</label>
+                                    {{ form.nombres }}
+                                    <span class="ponerRojo">El nombre debe tener de 3 a 35 caracteres y no debe de contener números</span>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Fecha de nacimiento</label>
+                                    {{ form.fecha_nacimiento }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Tipo de periodo </label>
+                                    {{ form.tipo_periodo }}
+                                </div>
+                                <div class="colum_input" id="grupoHora">
+                                    <label>Salario base</label>
+                                    {{ form.salario_base}}
+                                    <span class="ponerRojo">El campo debe de tener de 1 a 4 dígitos y dos decimales</span>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Base cotización</label>
+                                    {{ form.base_cotizacion }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input" id="grupoPuesto">
+                                    <label>Puesto</label>
+                                    {{ form.puesto }}
+                                    <span class="ponerRojo">El campo debe de tener mas de 3 letras y no debe de contener números</span>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Integrado</label>
+                                    {{ form.integrado }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>comida</label>
+                                    {{ form.comida }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input  widthEmp">
+                                    <label>Campo agrícola</label>
+                                    {{ form.campo_agricola }}
+                                </div>
+                                <div class="colum_input widthEmp">
+                                    <label>Estatus</label>
+                                    {{ form.estatus }}
+                                </div>
+                                <div class="colum_input widthEmp">
+                                    <label>Cuadrillero</label>
+                                    {{ form.cuadrillero }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel_default">
+                        <div class="panel panel_default">
+                            <div class="panel_heading">
+                                <h3>Información general</h3>
+                            </div>
+                        </div>
+                        <div class="panel_body" id="formulario">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Numero de seguro social</label>
+                                    {{ form.num_seguro_social }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Numero de infonavit</label>
+                                    {{ form.num_infonavit }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>R.F.C</label>
+                                    {{ form.rfc_trabajador }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>CURP</label>
+                                    {{ form.curp }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Sexo</label>
+                                    {{ form.sexo }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Estado Civil</label>
+                                    {{ form.edo_civil }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre de la madre</label>
+                                    {{ form.nombre_madre }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre del padre</label>
+                                    {{ form.nombre_padre }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input  widthEmp">
+                                    <label>Domicilio</label>
+                                    {{ form.domicilio }}
+                                </div>
+                                <div class="colum_input widthEmp">
+                                    <label>Código postal</label>
+                                    {{ form.codigo_postal }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input  widthEmp">
+                                    <label>Lugar de nacimiento (Estado)</label>
+                                    {{ form.lugar_nacimiento }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input  widthEmp">
+                                    <label> Nombre del familiar(Referencia 1)</label>
+                                    {{ form.familiar_referencia_1 }}
+                                </div>
+                                <div class="colum_input widthEmp">
+                                    <label> Nombre del familiar(Referencia 2)</label>
+                                    {{ form.familiar_referencia_2 }}
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input  widthEmp">
+                                    <label>Teléfono Celular(Referencia 1)</label>
+                                    {{ form.telefono_referencia_1 }}
+                                </div>
+                                <div class="colum_input widthEmp">
+                                    <label>Teléfono Celular(Referencia 2)</label>
+                                    {{ form.telefono_referencia_2 }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%include 'home/conmon/btnGuardar.html' %}
+                </div>
+                    </form>
+                    
+        </div>
+</section>
+
+{% if form.errors %}
+
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <label> ({{ field.label }})  {% trans error|escape %} </label>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <label> {% trans error|escape %} </label>
+                    {% endfor %}
+
+                {% endif %}
+
+<script src={% static 'js/fletes/registroFletes.js' %}></script>
+{% endblock contenido %}

@@ -1,0 +1,72 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Consulta de semanas {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Consulta de Semanas</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:semanas:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Generador de semanas</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <div id="nombre_tipo">
+                                        <label>Dias:</label>
+                                        {{ nombre }}
+                                    </div>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Tipo de semana: </label>
+                                    <div class="form_control">
+                                        {{ tipo }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <form method="POST">    
+                                    <table id="tabla_fechas" class="tabla_listas_sem">
+                                        <thead class="thead_registro_sem">
+                                            <tr>
+                                                <th>Numero de Semana</th>
+                                                <th>Fecha de Inicio</th>
+                                                <th>Fecha Finalizada</th>
+                                            </tr>
+                                        </thead>
+                                        <label class="no_ver">{% for semana in lista_semanas %}</label>
+                                        <tbody>
+                                            <tr>
+                                                <td> {{ semana.semana }} </td>
+                                                <td> {{ semana.fecha_inicial }} </td>
+                                                <td> {{ semana.fecha_final }} </td>
+                                            </tr>
+                                        </tbody>
+                                        <label class="no_ver">{% endfor %}</label>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {%include 'home/conmon/btnMasEditar.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Section -->
+
+{% endblock contenido %}

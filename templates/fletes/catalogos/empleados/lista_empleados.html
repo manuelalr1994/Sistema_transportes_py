@@ -1,0 +1,48 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<!-- Section -->
+
+    <section class="listas">
+        <div class="listas_recientes">
+            <div class="encabezado_listas">
+                <h2 class="titulo">Lista de Empleados</h2>
+                <a href="resgistro_campos.html" class="btn">Nuevo Empleado</a>
+            </div>
+            <div class="overflow">
+                <table class="tabla_listas">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Empresa</th>
+                            <th>Tipo</th>
+                            <th>Cuadrilla</th>
+                            <th>Estatus</th>
+                            <th>Curp</th>
+                            <th>No.Tarjeta</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <td>00005678</td>
+                            <td>Carlos Alejandro Leon Duarte</td>
+                            <td>Videxport (StaInes 1)</td>
+                            <td>Fijo</td>
+                            <td>Arturo Moreno Cruz</td>
+                            <td>A</td>
+                            <td>LEDC161119HSRNBN02</td>
+                            <td>789456123</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> 
+
+<!-- Section -->
+
+{% endblock contenido %}

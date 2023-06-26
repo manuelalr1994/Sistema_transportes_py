@@ -1,0 +1,11 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+
+{% block contenido %}
+
+    <p> ¿Estas seguro que deseas eliminar la empresa {{ object.nombre }}?</p>
+    <form method="POST">{% csrf_token %} 
+        <input type="submit">
+    </form>
+
+{% endblock contenido %}

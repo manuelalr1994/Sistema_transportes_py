@@ -1,0 +1,4 @@
+<option value="">---selecciona variedad---</option>
+{% for variedad in variedades %}
+<option value="{{ variedad.pk }}"> {{ variedad }} </option>
+{% endfor %}

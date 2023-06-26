@@ -1,0 +1,17 @@
+{% extends 'home/home_panel.html' %}
+{% load static %}
+
+{% block titulo %} Sin Acceso {% endblock titulo %}
+
+{% block contenido %}
+
+<section style="margin-top: 7rem;">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo">No tiene acceso a esta pagina</h2>
+        </div>
+        <input style="margin-left: 42rem; margin-top: 2rem;" type="text" class="btn seleccion restart disable-select" onclick="location.href='{% url 'home:home_modulos' %}'" value="Volver al inicio">
+    </div>
+</section>
+
+{% endblock contenido %}

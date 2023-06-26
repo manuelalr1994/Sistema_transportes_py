@@ -1,0 +1,14 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+
+{% block contenido %}
+<section class="listas">    
+    <div class="listas_recientes">
+        <label> ¿Estas seguro que deseas eliminar la empresa {{ object.nombre }}?</label>
+        <form method="POST">{% csrf_token %} 
+            <input type="submit">
+        </form>
+    </div>
+</section>
+
+{% endblock contenido %}

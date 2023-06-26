@@ -1,0 +1,14 @@
+
+{% for registro in lista_abonos %}
+
+    <div class="colum_input varWidth textP">
+        <label>{{ registro.tipo }} en semana {{ registro.semana }}:</label>
+        <p>${{ registro.importe }}</p>
+    </div>
+
+{% endfor %}
+    
+    <div class="colum_input varWidth textP">
+        <label>Total:</label>
+        <p>${{ total }}</p>
+    </div>

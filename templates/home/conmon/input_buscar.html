@@ -1,0 +1,16 @@
+{% load static %}
+
+{% block buscar %}
+<div class="containerSearch">
+    <div class="contenedor_buscar">
+        <div class="caja_buscar">
+            <div class="input_buscar ">
+                <form method="GET"><input  class="control_input" type="text" placeholder="Buscar..."></form>
+            </div>
+        </div>
+        <div class="caja_img_buscar">
+            <img src= {% static 'img/Iconos/buscar.svg' %} class="img_buscar">
+        </div>
+    </div>
+</div>
+{% endblock buscar %}

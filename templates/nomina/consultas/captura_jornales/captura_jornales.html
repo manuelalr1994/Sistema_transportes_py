@@ -1,0 +1,697 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Captura de jornales {% endblock titulo %}
+{% block contenido %}
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Captura semanal de jornales</h2>
+        </div>
+
+        <div class="contenedorRegistro_empleados">
+            <form id="form">
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h2>Datos de la semana</h2>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Campo agricola:</label>
+                                {{ form.campo_agricola }}
+                            </div>
+                            <div class="colum_input">
+                                <label>Tipo Semana:</label>
+                                <select name="tipo_semana" id="tipo_semana" class="form_control" required>
+                                    <option value="">---selecciona tipo semana---</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label>Semana:</label>
+                                <select name="semana" id="semana" class="form_control" required>
+                                    <option value="">---selecciona semana---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Cuadrillero / Apuntador:</label>
+                                <select name="cuadrillero" id="cuadrillero" class="form_control" required>
+                                    <option value="">---selecciona cuadrillero---</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label id="nombre_tipo">Fecha:</label>
+                                <input class="form_control" id="fecha" disabled required>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Temporada:</label>
+                                {{ form.temporada }}
+                            </div>
+                            <div class="colum_input">
+                                <label>Labor:</label>
+                                {{ form.labor }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h2>Datos trabajados</h2>
+                    </div>
+                    <div class="panel_body">
+                        <div class="colum_input" style="width:100%">
+                            <label>Trabajador:</label>
+                            {{ form.empleado }}
+                            <!-- <div class="caja_seleccionar">
+                                <div class="contenedor_opciones">
+                                    <div class="option">
+                                        <input
+                                        type="radio"
+                                        class="radio"
+                                        id="automobiles"
+                                        name="category"
+                                        />
+                                        <label for="automobiles">Automobiles</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="film" name="category" value=" Film & Animation" />
+                                        <label for="film">Film & Animation</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="science" name="category" />
+                                        <label for="science">Science & Technology</label>
+                                      </div>
+                            
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="art" name="category" />
+                                        <label for="art">Art</label>
+                                      </div>
+                            
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="music" name="category" />
+                                        <label for="music">Music</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="travel" name="category" />
+                                        <label for="travel">Travel & Events</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="sports" name="category" />
+                                        <label for="sports">Sports</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="news" name="category" />
+                                        <label for="news">News & Politics</label>
+                                    </div>
+                                    
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="tutorials" name="category" />
+                                            <label for="tutorials">Tutorials</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="escoger form_control">
+                                        Select Video Category
+                                    </div>
+                                    
+                                    <div class="buscar_select">
+                                        <input type="text" placeholder="Start Typing..." />
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        
+                        <div class="roll">
+                        <div class="colum_input" style="width:50%">
+                                <label>Cuenta:</label>
+                                <input id="cuenta" type="number" class="form_control" disabled>
+                            </div>
+                            <div class="colum_input" style="width:50%">
+                                <label>No. Tarjeta:</label>
+                                <input id="no_tarjeta" type="number" class="form_control" disabled>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Puesto:</label>
+                                <input class="form_control" id="puesto" disabled required>
+                            </div>
+                            <div class="colum_input">
+                                <label>Referencia:</label>
+                                {{ form.referencia }}
+                            </div>
+                            <div class="colum_input">
+                                <label>Salario:</label>
+                                <input class="form_control" id="salario" required disabled>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Costo hora extra:</label>
+                                <input class="form_control" id="costo_hra_extra" disabled required>
+                            </div>
+                            <div class="colum_input">
+                                <label>Hora:</label>
+                                <input class="form_control" id="nombre_compania" disabled required>
+                            </div>
+                            <div class="colum_input">
+                                <label>Dinero:</label>
+                                <input class="form_control" id="costo_hra_camion" required disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel tab_default">
+                        <div>
+                            <table id="tabla_fechas" class="tabla_captura">
+                                <thead class="thead_registro_sem">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Tiempo</th>
+                                        <th>H. Trac.</th>
+                                        <th>Dinero</th>
+                                        <th>Horas Extra</th>
+                                        <th>Ahorro</th>
+                                        <th>Comida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in dias_semana %}
+                                        <tr>
+                                            <td class="grayColor">
+                                                <input class="no_border text_black" type="text" id="fecha_{{ i }}" disabled>
+                                            </td>
+                                            <td> <input class="no_border text_black tope" type="number" step="0.1"
+                                                    id="tiempo_{{ i }}" min="0" max="24" disabled> </td>
+                                            <td> <input class="no_border text_black tope" type="number" step="0.1"
+                                                    id="h_trac_{{ i }}" min="0" max="24" disabled> </td>
+                                            <td class="grayColor">
+                                                <input class="no_border text_black" type="number" step="0.1"
+                                                    id="total_dinero_{{ i }}"> </td>
+                                            <td class="grayColor">
+                                                <input class="no_border text_black" type="number" step="0.1"
+                                                    id="total_hrs_extra_{{ i }}"> </td>
+                                            <td class="grayColor">
+                                                <input class="no_border text_black" type="number" step="0.1"
+                                                    id="ahorro_{{ i }}" disabled> </td>
+                                            <td class="grayColor">
+                                                <input class="no_border text_black" type="number" step="0.1"
+                                                    id="comida_{{ i }}" disabled> </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel_ch" style="top: 568px;">
+                        <div>
+                            <div class="panel_body">
+                                <div class="totales_cap roll">
+                                    <div class="colum_totales">
+                                        <label>Total de Dinero:</label>
+                                        <input id="total_dinero" type="text" class="form_control text_center" disabled>
+                                    </div>
+                                    <div class="colum_totales">
+                                        <label>Total Horas Extra:</label>
+                                        <input id="total_hrs_extra" type="text" class="form_control text_center" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="botones">
+                <input type="submit" id="submit" class="btn seleccion save disable-select" value="Guardar">
+                <input type="button" id="reset" class="btn seleccion restart disable-select" value="Reiniciar">
+            </div>
+            <div class="errorPadre" id="error">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- el error de empalmamiento de urls en AJAX se daba por que faltaba el / al principio de la url -->
+
+<!-------------------------------------------JAVASCRIPT------------------------------------------------->
+
+<script src="{% static 'js/decimal.js' %}"></script>
+<script src="{% static 'js/select_search/select_buscador.js'%}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+
+        // Variables Globales
+        semana_cerrada = false // Guarda si la semana fue cerrada o no
+
+        $("#campo_agricola").change(function () {
+            var campo_agricola_id = $(this).val();
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarCuadrillero' %}",
+                data: {
+                    'empresa': campo_agricola_id
+                },
+                success: function (data) {
+                    $("#cuadrillero").html(data);
+                }
+            });
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarTipoSemana' %}",
+                data: {
+                    'empresa': campo_agricola_id
+                },
+                success: function (data) {
+                    $("#tipo_semana").html(data);
+                }
+            });
+
+        });
+
+        $("#tipo_semana").change(function () {
+            var tipo_semana_id = $(this).val();
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarSemana' %}",
+                data: {
+                    'tipo_semana': tipo_semana_id
+                },
+                success: function (data) {
+                    $("#semana").html(data);
+                }
+            });
+
+        });
+
+        $("#semana").change(function () {
+            var semana_id = $(this).val();
+            $("#total_hrs").prop('value', '')
+            $("#total_importe").prop('value', '')
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarFecha' %}",
+                data: {
+                    'semana': semana_id
+                },
+                success: function (data) {
+                    $("#fecha").prop('value', data['fecha']);
+                    $("#fecha").trigger('change')
+                }
+            });
+
+        });
+
+        $("#empleado").change(function () {
+            var empleado_id = $(this).val();
+            $("#total_dinero").prop('value', '')
+            $("#total_dinero_hrs_extra").prop('value', '')
+
+            $.ajax({
+                url: "{% url 'nomina:consultas:captura_jornales:cargarDatosEmpleado' %}",
+                data: {
+
+                    'empleado': empleado_id
+                },
+                success: function (data) {
+                    $("#cuenta").prop("value", data['cuenta']);
+                    $("#no_tarjeta").prop("value", data['no_tarjeta']);
+                    $("#puesto").prop("value", data['puesto']);
+                    $("#salario").prop("value", data['salario']);
+                    $("#costo_hra_extra").prop("value", data['costo_hra_extra']);
+                    $('#costo_hra_extra').trigger('change')
+                    if (semana_cerrada){
+                        for (let i = 1; i < 8; i++){
+                            $('#dinero_'+i).prop('disabled', true)
+                            $('#hrs_extra_'+i).prop('disabled', true)
+                        }
+                    }
+                }
+            });
+
+        });
+
+        // Rellenar los campos con id fecha_# basados en el rango del campo fecha
+        // Funcion que crea una lista con un rango de fechas, basado en 2 objetos date
+        function obtenerRangoFechas(fecha_inicio, fecha_fin) {
+            rango_fechas = []
+            fecha_seguimiento = new Date(fecha_inicio.getTime())
+
+            while (fecha_seguimiento <= fecha_fin) {
+                rango_fechas.push(new Date(fecha_seguimiento));
+                fecha_seguimiento.setTime(fecha_seguimiento.getTime() + 1000 * 60 * 60 * 24);
+            }
+
+            return rango_fechas
+        }
+
+
+        // Genera las fechas de la tabla, una vez detecta el rango en el campo fecha
+        $("#fecha").change(function () {
+
+            // Las fechas_originales de inicio y de fin de la semana se separan
+            var fechas_originales = $(this).val().split('   a   ')
+
+            // Guardamos en el indice de cada fecha, cada fecha pero como objeto Date
+            for (let i = 0; i < 2; i++) {
+
+                // Guardamos en el indice de cada fecha, la misma fecha pero separada por -
+                fechas_originales[i] = fechas_originales[i].split('-')
+
+                // Transformamos todos los campos de esta fecha en especifico en enteros
+                for (let j = 0; j < 3; j++) {
+                    fechas_originales[i][j] = parseInt(fechas_originales[i][j])
+                }
+
+                // Guardamos el objeto tipo date en el campo que actualmente se esta recorriendo
+                // de fechas originales
+                anio = fechas_originales[i][0]
+                mes = fechas_originales[i][1] - 1 // Javascript indexa los meses como 0 (ene), 1 (feb), por eso la resta
+                dia = fechas_originales[i][2]
+                fechas_originales[i] = new Date(anio, mes, dia)
+
+            }
+
+            // Obtenemos fechas segun el rango de fecha inicial y fecha final
+            fechas = obtenerRangoFechas(fechas_originales[0], fechas_originales[1])
+
+            // Mostramos en cada campo su respectiva fecha
+            const formato = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }
+            for (let i = 1; i < 8; i++) {
+                $('#fecha_' + i).prop('value', fechas[i - 1].toLocaleDateString(undefined, formato))
+            }
+
+        });
+
+
+        // Recuperar las fechas ya registradas del camion y resetear los campos pertinentes en la tabla
+        $("#empleado, #fecha").change(function () {
+
+            // Ponemos por default los campos de la tabla cuando haya un cambio en fecha o camion
+            for (var i = 1; i < 8; i++) {
+
+                $("#total_dinero_" + i).prop('value', '')
+                $("#total_dinero_" + i).prop('disabled', false)
+
+                $("#total_hrs_extra_" + i).prop('value', '')
+                $("#total_hrs_extra_" + i).prop('disabled', false)
+
+            }
+
+            empleado = $('#empleado').val()
+            fecha = $('#fecha').val()
+            campo_agricola = $('#campo_agricola').val()
+
+            if (empleado.length > 0 && fecha.length > 0 && campo_agricola.length > 0) {
+
+                empleado = parseInt(empleado)
+                fecha = fecha.split("   a   ")
+                fecha_inicial = fecha[0]
+                fecha_final = fecha[1]
+
+                $.ajax({
+                    url: "{% url 'nomina:consultas:captura_jornales:cargarDiasEmpleado' %}",
+                    data: {
+                        'campo_agricola' : campo_agricola,
+                        'fecha_inicial': fecha_inicial,
+                        'fecha_final': fecha_final,
+                        'empleado': empleado
+                    },
+                    success: function (data) {
+
+                        if (data['exitoso']) {
+
+                            if (data['existe_lista_dias']) {
+
+                                // Se recorren los dias de la lista del servidor y se hace el match con las fechas
+                                // de la tabla, si hacen match, se guarda la informacion de esa fila
+                                for (var dia of data['lista_dias']) {
+
+                                    // Hacemos la conversion de la fecha para hacer la comparacion en el mismo formato
+                                    dia.fecha = dia.fecha.split('-')
+                                    dia.fecha = dia.fecha[2] + '/' + dia.fecha[1] + '/' +
+                                        dia.fecha[0]
+
+                                    for (let i = 1; i < 8; i++) {
+                                        if (dia.fecha == $("#fecha_" + i).val()) {
+
+                                            $("#total_dinero_" + i).prop('value', dia.total_dinero)
+                                            $("#total_dinero_" + i).trigger('change')
+                                            $("#total_dinero_" + i).prop('disabled', true)
+
+                                            $("#total_hrs_extra_" + i).prop('value', dia.total_hrs_extra)
+                                            $("#total_hrs_extra_" + i).trigger('change')
+                                            $("#total_hrs_extra_" + i).prop('disabled', true)
+
+                                        }
+                                    }
+                                }
+                            } else {
+                                $("#total_hrs_extra_" + i).prop('value', '')
+                                $("#total_dinero_" + i).prop('value', '')
+                            }
+
+                        } else {
+                            $("error").html( '<p class="errorGeneral">'+ data['error'] +'</p>')
+                        }
+
+                    },
+                    error: function (jqXHR, estado, error) {
+                        $("#error").html(
+                            '<p class="errorGeneral">Hubo un error en el servidor</p>'
+                            );
+                    }
+
+                });
+
+            }
+
+        });
+
+
+        // Peticion POST con AJAX para hacer la subida al servidor, mediante el boton submit
+        $("#submit").click(function () {
+            var url = "{% url 'nomina:consultas:captura_jornales:registrar' %}"
+            var campo_agricola = $("#campo_agricola").val();
+            var tipo_semana = $("#tipo_semana").val();
+            var semana = $("#semana").val();
+            var cuadrillero = $("#cuadrillero").val();
+            var temporada = $("#id_temporada").val();
+            var labor = $("#labor").val();
+            var empleado = $("#empleado").val();
+            var referencia = $("#id_referencia").val();
+            var fechas = []
+            var totales_dinero = []
+            var horas_extra = []
+
+            // Se añaden a las listas los campos de la tabla que si tienen valores
+            for (let i = 1; i < 8; i++) {
+                if ($("#fecha_" + i).val().length > 0 && $("#total_dinero_" + i).val().length > 0 
+                && $("#total_hrs_extra_" + i).val().length > 0) {
+
+                    fechas.push($("#fecha_" + i).val())
+                    totales_dinero.push($("#total_dinero_" + i).val())
+                    horas_extra.push($("#total_hrs_extra_" + i).val())
+
+                }
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'campo_agricola': campo_agricola,
+                    'tipo_semana': tipo_semana,
+                    'semana': semana,
+                    'cuadrillero': cuadrillero,
+                    'temporada': temporada,
+                    'labor': labor,
+                    'empleado': empleado,
+                    'referencia': referencia,
+                    'fechas': fechas,
+                    'totales_dinero': totales_dinero,
+                    'horas_extra': horas_extra
+                },
+                success: function (data) {
+                    if (data['exitoso']) {
+                        for (let i = 1; i < 8; i++) {
+                            $('#fecha_' + i).prop('value', '')
+                            $('#total_dinero_' + i).prop('value', '')
+                            $('#total_hrs_extra_' + i).prop('value', '')
+                            $("#error").html('');
+                        }
+                    } else {
+                        if (data['errors']) {
+                            errors = data['errors']
+                            string_errors = ''
+                            console.log('este es el data errors majing')
+                            console.log(typeof (errors))
+
+                            for (let [campo, errores] of Object.entries(errors)) {
+                                for (let error of errores) {
+                                    console.log(campo)
+                                    console.log(error)
+                                    string_errors = string_errors + "(" + campo + ") " +
+                                        error + "\n"
+                                }
+                            }
+                            console.log(string_errors)
+                            $("#error").html(
+                                '<p>' +
+                                string_errors +
+                                '</p>'
+                                );
+
+                        } else if (data['error']) {
+                            $("#error").html(
+                                '<p class="errorGeneral">'+
+                                data['error'] +
+                                '</p>'
+                                );
+                        }
+
+                    }
+                },
+                error: function (jqXHR, estado, error) {
+                    $("#error").html(
+                        '<p class="errorGeneral">Hubo un error en el servidor</p>'
+                        );
+                }
+            });
+        });
+
+        // Funcion para el boton de Reset
+        $("#reset").click(function () {
+            $("#form")[0].reset();
+        });
+
+        // Revisamos si la semana seleccionada ya fue cerrada
+        $("#campo_agricola, #tipo_semana, #semana").change( function(){
+            campo_agricola = $("#campo_agricola").val()
+            tipo_semana = $("#tipo_semana").val()
+            semana = $("#semana").val()
+
+            if(campo_agricola.length > 0 && tipo_semana.length > 0 && semana.length > 0){
+
+                campo_agricola = $('#campo_agricola').val() 
+                tipo_semana = $('#tipo_semana').val() 
+                semana = $('#semana').val() 
+
+
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:verificarSemanaCerrada' %}",
+                    data: {
+                        'campo_agricola': campo_agricola,
+                        'tipo_semana': tipo_semana,
+                        'semana': semana,
+                    },
+                    success: function (data) {
+                        if(data['semana_cerrada']){
+                            alert(data['mensaje_semana_cerrada'])
+                            semana_cerrada = true
+                            for (let i = 1; i < 8; i++){
+                                $('#hora_entrada_'+i).prop('disabled', true)
+                                $('#hora_salida_'+i).prop('disabled', true)
+                            }
+                        }else{
+                            semana_cerrada = false
+                        }
+                    }
+                });
+
+            }
+        });
+
+
+        // ---------------------------- CALCULOS DE TABLA --------------------------------
+
+        // Mostramos el Total de Dinero
+        $("#total_dinero_1, #total_dinero_2, #total_dinero_3, #total_dinero_4, #total_dinero_5, #total_dinero_6, #total_dinero_7").change(
+            function () {
+
+                totales_dinero = {}
+                totales_dinero.total_dinero_1 = parseFloat($('#total_dinero_1').val())
+                totales_dinero.total_dinero_2 = parseFloat($('#total_dinero_2').val())
+                totales_dinero.total_dinero_3 = parseFloat($('#total_dinero_3').val())
+                totales_dinero.total_dinero_4 = parseFloat($('#total_dinero_4').val())
+                totales_dinero.total_dinero_5 = parseFloat($('#total_dinero_5').val())
+                totales_dinero.total_dinero_6 = parseFloat($('#total_dinero_6').val())
+                totales_dinero.total_dinero_7 = parseFloat($('#total_dinero_7').val())
+
+                for (let i = 1; i < 8; i++) {
+                    if (isNaN(totales_dinero["total_dinero_" + i])) {
+                        totales_dinero["total_dinero_" + i] = 0;
+                    }
+                }
+
+                total_dinero_1 = new Decimal(totales_dinero.total_dinero_1)
+                total_dinero_2 = new Decimal(totales_dinero.total_dinero_2)
+                total_dinero_3 = new Decimal(totales_dinero.total_dinero_3)
+                total_dinero_4 = new Decimal(totales_dinero.total_dinero_4)
+                total_dinero_5 = new Decimal(totales_dinero.total_dinero_5)
+                total_dinero_6 = new Decimal(totales_dinero.total_dinero_6)
+                total_dinero_7 = new Decimal(totales_dinero.total_dinero_7)
+
+                total_dinero = total_dinero_1.add(total_dinero_2).add(total_dinero_3).add(total_dinero_4).add(total_dinero_5).
+                add(total_dinero_6).add(total_dinero_7)
+                $("#total_dinero").prop("value", total_dinero.toNumber());
+
+            });
+
+        // Mostramos Total de Horas Extra
+        $("#total_hrs_extra_1, #total_hrs_extra_2, #total_hrs_extra_3, #total_hrs_extra_4, #total_hrs_extra_5, #total_hrs_extra_6, #total_hrs_extra_7")
+            .change(function () {
+
+                lista_horas_extra = {}
+                lista_horas_extra.total_hrs_extra_1 = parseFloat($('#total_hrs_extra_1').val())
+                lista_horas_extra.total_hrs_extra_2 = parseFloat($('#total_hrs_extra_2').val())
+                lista_horas_extra.total_hrs_extra_3 = parseFloat($('#total_hrs_extra_3').val())
+                lista_horas_extra.total_hrs_extra_4 = parseFloat($('#total_hrs_extra_4').val())
+                lista_horas_extra.total_hrs_extra_5 = parseFloat($('#total_hrs_extra_5').val())
+                lista_horas_extra.total_hrs_extra_6 = parseFloat($('#total_hrs_extra_6').val())
+                lista_horas_extra.total_hrs_extra_7 = parseFloat($('#total_hrs_extra_7').val())
+
+                for (let i = 1; i < 8; i++) {
+                    if (isNaN(lista_horas_extra["total_hrs_extra_" + i])) {
+                        lista_horas_extra["total_hrs_extra_" + i] = 0;
+                    }
+                }
+
+                total_hrs_extra_1 = new Decimal(lista_horas_extra.total_hrs_extra_1)
+                total_hrs_extra_2 = new Decimal(lista_horas_extra.total_hrs_extra_2)
+                total_hrs_extra_3 = new Decimal(lista_horas_extra.total_hrs_extra_3)
+                total_hrs_extra_4 = new Decimal(lista_horas_extra.total_hrs_extra_4)
+                total_hrs_extra_5 = new Decimal(lista_horas_extra.total_hrs_extra_5)
+                total_hrs_extra_6 = new Decimal(lista_horas_extra.total_hrs_extra_6)
+                total_hrs_extra_7 = new Decimal(lista_horas_extra.total_hrs_extra_7)
+
+                if(!isNaN(parseFloat($('#costo_hra_extra').val()))){
+                    total_hrs_extra = total_hrs_extra_1.add(total_hrs_extra_2).add(total_hrs_extra_3).add(total_hrs_extra_4).add(total_hrs_extra_5)
+                    .add(total_hrs_extra_6).add(total_hrs_extra_7)
+                    total_hrs_extra = new Decimal(total_hrs_extra)
+                    total_hrs_extra = total_hrs_extra.mul(parseFloat($('#costo_hra_extra').val()))
+                    $("#total_hrs_extra").prop("value", total_hrs_extra.toNumber());
+                }
+                
+            });
+
+    });
+</script>
+
+{% endblock contenido %}

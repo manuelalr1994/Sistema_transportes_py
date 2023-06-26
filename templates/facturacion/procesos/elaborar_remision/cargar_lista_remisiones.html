@@ -1,0 +1,41 @@
+
+{% for registro in lista_estado_cuenta %}
+
+        {% if registro.fecha %}
+
+            <tr>
+                <td><b>REMISIÓN</b></td>
+                <td class="bgBlue"></td>
+                <td></td>
+                <td>{{ registro.codigo }}</td>
+                <td>{{ registro.fecha }}</td>
+                <td></td>
+                <td></td>
+                <td class="bgLight"></td>
+                <td class="bgBlue">
+                    {{ registro.importe }}
+                    <input remision="{{ registro.pk }}" type="button" value="Desglose" class="btnDesgloce">
+                </td>
+                <td>{{ registro.saldo }}</td>
+            </tr>
+        
+        {% else %}
+
+            <tr>
+                <td>Maquila</td>
+                <td class="bgBlue">{{ registro.semana }}</td>
+                <td>{{ registro.fecha_semana }}</td>
+                <td></td>
+                <td></td>
+                <td>{{ registro.hrs_fletes }}</td>
+                <td>{{ registro.costo_maquila }}</td>
+                <td class="bgLight">{{ registro.importe }}</td>
+                <td class="bgBlue"></td>
+                <td>{{ registro.saldo }}</td>
+            </tr>
+
+        {% endif %}
+
+{% endfor %}
+    
+    

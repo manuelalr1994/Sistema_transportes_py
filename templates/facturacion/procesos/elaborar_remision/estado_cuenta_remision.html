@@ -1,0 +1,647 @@
+{% extends 'home/home_facturacion.html' %}
+{% load static %}
+
+{% block titulo %} Estado de cuenta remision{% endblock titulo %}
+
+{% block contenido %}
+<div class="modalContainer">
+    <div class="modal modalWidth modalClose">
+        <p class="close marginClose" id="closeModal">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Generar remision</h2>
+                        </div>
+                        <div class="panel_body"> 
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input colum_inputVar">
+                                    <label>Importe a generar:</label>
+                                    <input id="importe_remision" class="form_control" type="text">
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input colum_inputVar">
+                                    <label>Fecha:</label>
+                                    <input id="fecha" class="form_control" type="date">
+                                </div>
+                                <div class="colum_input colum_inputVar">
+                                    <label>Remision:</label>
+                                    <input id="remision" class="form_control" type="number" disabled>
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input colum_inputVar">
+                                    <label>Campo Agricola:</label>
+                                    <input campo_agricola="" id="campo_agricola_modal" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input colum_inputVar">
+                                    <label>Ubicacion:</label>
+                                    <input ubicacion="" id="ubicacion" class="form_control" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel_default">
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="overflow_modal" style="height: 15%;">
+                                    <table id="tabla_semanas_remision" class="tab_mod_modal">
+                                        <thead class="thead_registro colorModal">
+                                            <tr>
+                                                <th>Semanas</th>
+                                                <th>Concepto</th>
+                                                <th>Tipo de pago</th>
+                                                <th>Importe</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabla_abonos" >
+                                            <tr>
+                                                <td><input class="form_control" type="text" disabled value="Semana 1"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled
+                                                        value="21/05/2020 - 28/05/2020" style="text-align: center; padding: 0px 12px;">
+                                                </td>
+                                                <td><input class="form_control" type="text" disabled value="Pago total"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled value="$125,130.00"
+                                                        style="text-align: center; padding: 0px 12px; font-weight: 700;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form_control" type="text" disabled value="Semana 1"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled
+                                                        value="21/05/2020 - 28/05/2020" style="text-align: center; padding: 0px 12px;">
+                                                </td>
+                                                <td><input class="form_control" type="text" disabled value="Pago total"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled value="$125,130.00"
+                                                        style="text-align: center; padding: 0px 12px; font-weight: 700;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form_control" type="text" disabled value="Semana 1"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled
+                                                        value="21/05/2020 - 28/05/2020" style="text-align: center; padding: 0px 12px;">
+                                                </td>
+                                                <td><input class="form_control" type="text" disabled value="Pago total"
+                                                        style="text-align: center; padding: 0px 12px;"></td>
+                                                <td><input class="form_control" type="text" disabled value="$125,130.00"
+                                                        style="text-align: center; padding: 0px 12px; font-weight: 700;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="grupo_formulario roll" style="flex-direction: row-reverse;">
+                                        <div class="colum_input">
+                                            <label>Total:</label>
+                                            <input id="total_remision" class="form_control" type="number" value="800" disabled
+                                                style="text-align: center; padding: 0px; font-size: 16px; font-weight: 700;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botones">
+                        <input type="button" id="boton_submit" class="btn seleccion_ch save disable-select"
+                            value="Generar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modalContainerDos">
+    <div class="modalDos modalCloseDos">
+        <p class="close paddingClose marginClose" id="closeModalDos">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Facturación</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div id="tabla_remision" class="grupo_formulario">
+                                <div class="colum_input varWidth textP">
+                                    <label>Pago total en semana 1:</label>
+                                    <p>$100.00</p>
+                                </div>
+                                <div class="colum_input varWidth textP">
+                                    <label>Pago total en semana 2:</label>
+                                    <p>$200.00</p>
+                                </div>
+                                <div class="colum_input varWidth textP">
+                                    <label>Abono en semana 3:</label>
+                                    <p>$1,000,300.00</p>
+                                </div>
+
+                                <div class="colum_input varWidth textP">
+                                    <label>Total:</label>
+                                    <p>$600.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Estado de cuenta</h2>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form id="formulario_bitacora" method="post"
+                action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+                <div class="panel panel_default panelModCamiones">
+                    <div class="modCamiones">
+                        <b>Campo Agricola:</b>
+                        <input type="text" id="campo_agricola" class="form_control"
+                        value="{{ campo_agricola.nombre }}" campo_agricola="{{ campo_agricola.pk }}" disabled>
+                    </div>
+                    <div class="modCamiones">
+                        <b>Desde:</b>
+                        <input id="fecha_inicio" type="date" class="form_control" required>
+
+                        <b>Hasta:</b>
+                        <input id="fecha_final" type="date" class="form_control" required>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="containerImprimir">
+                        <div class="imprimir colorImprimir" id="contenido_tabla_capturas">
+                            <input id="abrirModal" class="imprimirInput varImprimir" type="button"
+                                value="Generar remisión">
+                        </div>
+                    </div>
+                    <div class="containerImprimir">
+                        <div class="imprimir colorImprimirVar">
+                            <input type="button" id="reporte_bitacora" value="Imprimir listado">
+                        </div>
+                    </div>
+                    <div class="containerImprimir">
+                        <div class="imprimir colorImprimirVar">
+                            <input type="button" id="reporte_bitacora" value="Imprimir remisión"
+                                style="background-color: #2d5e41;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel_default fontSize">
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="overflow_mod_cam" id="contenido_tabla_capturas_dos">
+                                <table id="tabla_fechas" class="tab_mod_camiones">
+                                    <thead>
+                                        <tr>
+                                            <th>Concepto</th>
+                                            <th>N° Semana</th>
+                                            <th>Semanas</th>
+                                            <th>Remisión</th>
+                                            <th>Fecha</th>
+                                            <th>Horas fletes</th>
+                                            <th>Costo maquila</th>
+                                            <th>Importe maquila</th>
+                                            <th>Abonos</th>
+                                            <th>Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="consultaRemision">
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>REMISIÓN</b></td>
+                                            <td class="bgBlue"></td>
+                                            <td></td>
+                                            <td>100012</td>
+                                            <td>24/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="bgLight"></td>
+                                            <td class="bgBlue">
+                                                $ 585,000.00
+                                                <input type="button" value="Desglose" class="btnDesgloce">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>REMISIÓN</b></td>
+                                            <td class="bgBlue"></td>
+                                            <td></td>
+                                            <td>100012</td>
+                                            <td>24/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="bgLight"></td>
+                                            <td class="bgBlue">
+                                                $ 585,000.00
+                                                <input type="button" value="Desglose" class="btnDesgloce">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maquila</td>
+                                            <td class="bgBlue">1</td>
+                                            <td>28/12/2021 - 03/01/2022</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>856.00</td>
+                                            <td>270.00</td>
+                                            <td class="bgLight">231,120.00</td>
+                                            <td class="bgBlue"></td>
+                                            <td>$ 231,120.00</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+
+<script src="../../../../static/js/modal.js"></script>
+<script src="../../../../static/js/modalDos.js"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+
+        lista_abonos = []
+
+        // --------------------- FILTRADO DE DATOS POR RANGO DE SEMANAS ---------------------------
+        $('#fecha_inicio, #fecha_final').change(function() {
+            var campo_agricola_id = $('#campo_agricola').attr('campo_agricola')
+            var fecha_inicio = $('#fecha_inicio').val()
+            var fecha_final = $('#fecha_final').val()
+
+            if(campo_agricola_id.length > 0 && fecha_inicio.length > 0 && fecha_final.length > 0){
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:elaborar_remision:cargarListaRemisiones' %}",
+                    data: {
+                        'campo_agricola' : campo_agricola_id,
+                        'fecha_inicio' : fecha_inicio,
+                        'fecha_final' : fecha_final
+                    },
+                    success: function (data) {
+                        $('#consultaRemision').html(data)
+                    }
+                });
+            }
+
+        });
+
+
+         // --------------------- DESARROLLO DE BOTONES CON SUS DATOS ------------------------------
+         let lista_abrir = document.getElementById ("consultaRemision");
+        lista_abrir.addEventListener("click", function(e){
+            const elemento_accionado = e.target;
+
+            if (elemento_accionado.matches(".btnDesgloce")){
+                remision_id = elemento_accionado.getAttribute("remision")
+
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:elaborar_remision:cargarDesglose' %}",
+                    data: {
+                        'remision':remision_id
+                    },
+                    success: function (data) {
+
+                        console.log('sexo')
+                        console.log(data)
+                        
+                        // Mandamos los datos al Modal
+                        $("#tabla_remision").html(data)
+
+                    }
+                });
+
+            }
+
+        });
+
+
+        // --------------------- FUNCIONAMIENTO DE MODAL GENERACION DE REMISION ----------------------------
+        $('#abrirModal').click( function(){
+
+            campo_id = $('#campo_agricola').attr('campo_agricola')
+
+            if(campo_id.length > 0){
+                
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:elaborar_remision:cargarCampoAgricola' %}",
+                    data: {
+                        'campo_agricola':campo_id
+                    },
+                    success: function (data) {
+
+                        console.log(data)
+                        
+                        // Mandamos los datos al Modal
+                        $("#campo_agricola_modal").prop("value", data.campo_agricola.campo_agricola)
+                        $("#campo_agricola_modal").attr("campo_agricola", data.campo_agricola.campo_agricola_id)
+                        $("#ubicacion").prop("value", data.campo_agricola.ubicacion)
+                        $("#ubicacion").attr("ubicacion", data.campo_agricola.ubicacion_id)
+                        $("#remision").prop("value", data.campo_agricola.codigo_remision)
+
+                    }
+                });
+
+            }else {
+
+                if(!campo_id.length > 0){
+                    alert("Debe seleccionar un campo agricola")
+                }
+
+            }
+
+        });
+
+
+        $('#importe_remision').change(function(){
+            campo_agricola = $("#campo_agricola_modal").attr("campo_agricola")
+            cantidad_abono = $("#importe_remision").val()
+
+            if(campo_agricola.length > 0  &&  cantidad_abono.length > 0){
+
+                console.log('estamos en el if importe remision')
+                
+                $.ajax({ 
+                    url: "{% url 'facturacion:procesos:elaborar_remision:cargarSemanasRemision' %}",
+                    data: {
+                        'campo_agricola' : campo_agricola,
+                        'cantidad_abono' : cantidad_abono,
+                    },
+                    success: function (data) {
+                        console.log('estamos en el success mi nino')
+                        lista_abonos = data['lista_maquilas_abonadas']
+                        html_abonos = ""
+                        total_remision = 0
+
+                        console.log(data)
+
+                        for (abono of lista_abonos){
+                            console.log(abono)
+
+                            str = '<tr>\
+                            <td><input class="form_control" type="text" disabled value="Semana '+abono.no_semana+'"\
+                                    style="text-align: center; padding: 0px 12px;"></td>\
+                            <td><input class="form_control" type="text" disabled\
+                                    value="'+abono.fechas+'" style="text-align: center; padding: 0px 12px;">\
+                            </td>\
+                            <td><input class="form_control" type="text" disabled value="'+abono.tipo_abono+'"\
+                                    style="text-align: center; padding: 0px 12px;"></td>\
+                            <td><input class="form_control" type="text" disabled value="$'+abono.importe_abonado+'"\
+                                    style="text-align: center; padding: 0px 12px; font-weight: 700;"></td>\
+                            </tr>'
+
+                            html_abonos = html_abonos + str
+                            total_remision = total_remision + parseFloat(abono.importe_abonado)
+
+                        }
+
+                        total_remision = total_remision.toFixed(2)
+
+                        $('#tabla_abonos').html(html_abonos)
+                        $('#total_remision').prop('value', total_remision)
+
+                        if (total_remision < parseFloat($('#importe_remision').val())) {
+                            alert('El importe de la remision supera al adeudo de las maquilas')
+                        }
+                        
+                    }
+                });
+
+            }
+
+        })
+
+
+        $("#boton_submit").click(function() {
+            campo_agricola = $("#campo_agricola_modal").attr("campo_agricola")
+            ubicacion = $("#ubicacion").attr("ubicacion")
+            importe = $("#importe_remision").val()
+            fecha = $("#fecha").val()
+            codigo_remision = $("#remision").val()
+
+            console.log(campo_agricola)
+            console.log(ubicacion)
+            console.log(importe)
+            console.log(fecha)
+            console.log(codigo_remision)
+            console.log(lista_abonos)
+
+            console.log(campo_agricola.length > 0 && ubicacion.length > 0 && importe.length > 0 && fecha.length > 0 
+            && codigo_remision.length > 0 && lista_abonos.length > 0)
+
+            if (campo_agricola.length > 0 && ubicacion.length > 0 && importe.length > 0 && fecha.length > 0 
+            && codigo_remision.length > 0 && lista_abonos.length > 0){
+
+                console.log('dentro el fokin if')
+                console.log(lista_abonos)
+
+                url = '{% url "facturacion:procesos:elaborar_remision:estadoCuentaRemision" %}'
+                console.log('antes del ajax rey')
+
+                data = {
+                        "campo_agricola" : campo_agricola,
+                        "ubicacion" : ubicacion,
+                        "importe" : importe,
+                        "fecha" : fecha,
+                        "codigo_remision" : codigo_remision,
+                        "lista_abonos" : lista_abonos
+                    }
+
+                json_string = JSON.stringify(data)
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'json' : json_string
+                    },
+                    success: function (data) { 
+                        if (data['exitoso']){
+                            window.location = url
+                        }
+                        else {
+                            $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                        }
+                    },
+                    error: function(jqXHR, estado, error) {
+                        $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                    }
+                });
+
+            }
+
+
+        })
+
+
+    });
+
+    
+    
+
+
+</script>
+{% endblock contenido %}

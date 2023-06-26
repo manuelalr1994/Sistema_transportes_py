@@ -1,0 +1,57 @@
+{% extends 'users/base_users.html' %}
+{% load static %}
+{% block titulo %} Lista de Usuarios {% endblock titulo %}
+{% block contenido %}
+
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas disable-select">
+            <div>
+                <a class="btn seleccion_ch back disable-select" href="{% url 'users_app:user_panel' %}">Retornar</a>
+            </div>
+            <h2 class="titulo">Lista de Usuarios</h2>
+            <div class="seleccion_ch">
+                <a href="{% url 'users_app:user_register' %}" class="btn seleccion_ch add disable-select">Agregar</a>
+            </div>
+        </div>
+        {%include 'home/conmon/input_buscar.html' %}
+       
+        <div class="overflow">
+            <table class="tabla_listas_ch">
+            <thead>
+                <tr class="disable-select">
+                    <th>Username</th>
+                    <th>Nombre</th>
+                    <th>Activo</th>
+                    <th>Staff</th>
+                    <th>Super Usuario</th>
+                    <th>Permiso Fact.</th>
+                    <th>Permiso Flet.</th>
+                    <th>Permiso Flot.</th>
+                    <th>Permiso Nom.</th>
+                </tr>
+            </thead>
+            
+            
+            {% for user in lista_user %}
+                <tr onclick='location.href="{% url "users_app:user_consulta" pk=user.id %}"'>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.is_staff }}</td>
+                    <td>{{ user.is_superuser }}</td>
+                    <td>{{ user.permisos_facturacion }}</td>
+                    <td>{{ user.permisos_fletes }}</td>
+                    <td>{{ user.permisos_flotilla }}</td>
+                    <td>{{ user.permisos_nomina }}</td>
+                </tr>
+            {% endfor %}
+            
+            </table>
+        </div>
+    </div>
+</section>
+
+
+{% endblock contenido %}

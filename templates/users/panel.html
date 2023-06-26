@@ -1,0 +1,38 @@
+{% extends 'users/base_users.html' %}
+{% load static %}
+{% block titulo %} Panel de Usuario {% endblock titulo %}
+{% block contenido %}
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo">Panel de Usuario</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'home:home_modulos' %}">Retornar</a>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <div class="panel panel_default">
+                <div class="panel_body">
+                    <div class="grupo_formulario">
+                        <div class="text_center">
+                            <h1>Usuario: <b>{{user}}</b></h1>
+                            <div class="botones">
+                                {% if request.user.is_staff %}
+                                <input type="text" class="btn seleccion addUser disable-select" onclick="location.href='{% url 'users_app:user_list' %}'" value="Lista de Usuarios">
+                                {% endif %}
+                                <input type="text" class="btn seleccion signOff disable-select" onclick="location.href='{% url 'users_app:user_logout' %}'" value="Cerrar sesión">
+                                <input type="text" class="btn seleccion restart disable-select" onclick="location.href='{% url 'users_app:user_update' %}'" value="Actualizar">
+                                {% if request.user.is_superuser %}
+                                <input type="text" class="btn seleccion addUser disable-select" onclick="location.href='{% url 'users_app:user_register' %}'" value="Registrar usuario">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock contenido %}

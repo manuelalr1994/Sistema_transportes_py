@@ -1,0 +1,64 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Lista de cultivo {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas disable-select">
+            <section class="ubicacion">
+                <div>
+                    <label>Hermosillo</label>
+                </div>
+            </section>
+            <h2 class="titulo">Lista de Cultivos</h2>
+            <div class="seleccion_ch">
+                <a href="{% url 'nomina:catalogos:cultivos:registrar' %}" class="btn seleccion_ch add disable-select">Agregar</a>
+            </div>
+        </div>
+        {%include 'home/conmon/input_buscar.html' %}
+        {%include 'home/conmon/checkBox.html' %}
+        <div class="overflow">
+            <table class="tabla_listas_ch">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Numero</th>
+                    <th>Código de Variedad</th>
+                    <th>Nombre de Variedad</th>
+                    <!-- <th>Codigo de Cuadro</th>
+                    <th>Nombre de Cuadro</th>
+                    <th>Codigo de Lote</th>
+                    <th>Nombre de Lote</th> 
+                    <th>Has.</th>-->
+                </tr>
+            </thead>   
+
+                <tbody>
+                    
+                    {% for variedad in lista_variedades %}
+                        <tr class="direccion_registro">
+                            <td>{{ variedad.id_cultivo.codigo }}</td>
+                            <td>{{ variedad.id_cultivo.nombre }}</td>
+                            <td>{{ variedad.codigo }}</td>
+                            <td>{{ variedad.nombre }}</td>
+                            <!-- <td>003</td>
+                            <td>C#3 SUR</td>
+                            <td>001</td>
+                            <td>L-1</td>
+                            <td>4.8</td>-->
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </section> 
+
+
+<!-- Section -->
+
+{% endblock contenido %}

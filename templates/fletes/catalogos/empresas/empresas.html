@@ -1,0 +1,63 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Lista de empresas {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+    <section class="listas">
+        <div class="listas_recientes">
+            <div class="encabezado_listas disable-select">
+                <section class="ubicacion">
+                    <div>
+                        <label>Hermosillo</label>
+                    </div>
+                </section>
+                <h2 class="titulo">Lista de Empresas</h2>
+                <div class="seleccion_ch">
+                    <a href="{% url "fletes:catalogos:empresas:registrar" %}" class="btn seleccion_ch add disable-select">Agregar</a>
+                </div>
+            </div>
+            {%include 'home/conmon/input_buscar.html' %}
+            {%include 'home/conmon/checkBox.html' %}
+            <div class="overflow">
+                <table class="tabla_listas_ch">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre Empresa/Reclutador</th>
+                            <th>Ubicacion</th>
+                            <th>Tipo de Semana</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="div_tabla_empresas">
+                        {% for empresa in lista_empresas %}
+                        <tr onclick='location.href="{% url "fletes:catalogos:empresas:consultar" pk=empresa.id %}"' >
+                            <td>{{ empresa.codigo }}</td>
+                            <td>{{ empresa.nombre }}</td>
+                            <td>{{ empresa.ubicacion }}</td>
+                            <td>[
+                                {% for tipo in empresa.tipos_semana.all %}
+
+                                    {% if forloop.last %}
+                                        {{ tipo.tipo }}
+                                    {% else %}
+                                        {{ tipo.tipo }}, 
+                                    {% endif %}
+
+                                {% endfor %}
+                                ]
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- Section -->
+
+{% endblock contenido %}

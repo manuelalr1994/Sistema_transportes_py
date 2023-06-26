@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preload" href={% static "css/normalize.css" %} as="style">
+    <link rel="stylesheet" href={% static "css/normalize.css" %}>
+    <link rel="preload" href={% static "css/styleLogin.css" %} as="style">
+    <link rel="stylesheet" href={% static "css/styleLogin.css" %} >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">SistemasGSMO</div>
+        <form action="" method="POST">{% csrf_token %}
+            <div class="field">
+                {{ form.username }}
+                <label>Email</label>
+            </div>
+            <div class="field">
+                {{ form.password }}
+                <label>Contraseña</label>
+            </div>
+            <div class="content">
+                <div class="checkbox">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Recuerdame</label>
+                </div>
+                <div class="pass-link">
+                    <a href="#">Olvide mi contraseña</a>
+                </div>
+            </div>
+            <div class="field">
+                <input type="submit" value="Entrar">
+            </div>
+        </form>
+    </div>
+    <div class="imageBackground"></div>
+</body>

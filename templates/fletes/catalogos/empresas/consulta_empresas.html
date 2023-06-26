@@ -1,0 +1,184 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Consulta de empresa {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Consulta de Empresas</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:empresas:lista' %}">Retornar</a>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form method='POST'> {% csrf_token %}
+                <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos de la empresa</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo</label>
+                                    <input class="form_control" disabled value="{{ object.codigo }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre</label>
+                                    <input class="form_control" disabled value="{{ object.nombre }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Dirección</label>
+                                    <input class="form_control" disabled value="{{ object.direccion }}">
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Estado</label>
+                                    <input class="form_control" disabled value="{{ object.estado }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Colonia</label>
+                                    <input class="form_control" disabled value="{{ object.colonia }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Ciudad</label>
+                                    <input class="form_control" disabled value="{{ object.ciudad }}">
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>C.P.</label>
+                                    <input class="form_control" disabled value="{{ object.cp }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>R.F.C.</label>
+                                    <input class="form_control" disabled value="{{ object.rfc }}">
+                                </div>
+                                <div class="colum_input">
+                                    <label>Ubicacion</label>
+                                    <input class="form_control" disabled value="{{ object.ubicacion }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Sistema de pago</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Tipos de Semana</label>
+                                     [
+                                        {% for tipo in object.tipos_semana.all %}
+                                            
+                                            {% if forloop.last %}
+                                                {{ tipo.tipo }}
+                                            {% else %}
+                                                {{ tipo.tipo }}, 
+                                            {% endif %}
+                                            
+                                        {% endfor %}
+                                        ]                       
+                                </div>
+                                <div class="colum_input">
+                                    <label>Descuento Sindical</label>
+                                    {% if object.descuento_sindical %}
+                                        <input type="checkbox" checked disabled>  
+                                    {% else %}
+                                        <input type="checkbox" disabled>  
+                                    {% endif %}</div>                        
+                                <div class="colum_input">
+                                    <p>Semana 1: Martes - Lunes</p>
+                                    <p>Semana 2: Domingo - Sabado</p>
+                                    <p>Semana 3: Viernes - Jueves</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Bases de calculo</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Factor</label>
+                                    <input class="form_control" disabled value="{{ object.factor }}" >                        
+                                </div>
+                                <div class="colum_input">
+                                    <label>Bins</label>
+                                    <input class="form_control" disabled value="{{ object.bins }}" >                        
+                                </div>
+                                <div class="colum_input">
+                                    <label>Caja</label>
+                                    <input class="form_control" disabled value="{{ object.caja }}" >                        
+                                </div>
+                            </div>
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Ton.</label>
+                                    <input class="form_control" disabled value="{{ object.toneladas }}" >                       
+                                </div>
+                                <div class="colum_input">
+                                    <label>Planta</label>
+                                    <input class="form_control" disabled value="{{ object.planta }}" >                        
+                                </div>
+                                <div class="colum_input">
+                                    <label>Linea</label>
+                                    <input class="form_control" disabled value="{{ object.linea }}" >                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            {%include 'home/conmon/btnMasEditar.html' %}
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+
+{% endblock contenido %}
+
+<!-------------------------------------------Javascript----------------------------------------------->
+
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script>
+        
+            function toTablaTipos(string){
+                string = string.split(' ')
+                string[1] = ' - '
+                string[0][0][0] = string[0][0][0].toUpperCase()
+                string[2][0][0] = string[2][0][0].toUpperCase()
+
+                console.log(string[2][0][0])
+            
+                return string[0]+string[1]+string[2]
+            
+            }
+            
+            $(document).ready(function() {
+            
+                html = ""
+            
+                diccionario_tipos = {
+                    {% for key,value in diccionario_tipo_semanas.items %}
+                        {{ key }} : '{{ value }}',
+                    {% endfor %}
+                }
+            
+                for (tipo in diccionario_tipos){
+                    html = "<p>"+html+'SEMANA '+String(tipo)+': '+toTablaTipos(diccionario_tipos[tipo])+"</p>\n"
+                }
+
+                console.log(html)
+            
+                $('#tabla_tipos').html(html)
+
+            });
+            
+        </script>

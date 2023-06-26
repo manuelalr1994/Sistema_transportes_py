@@ -1,0 +1,31 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+
+{% block contenido %}
+
+        <section>
+            <div class="btn-grid_2">
+                <h2>Registro de Cuadrilla/Apuntador</h2>
+                <div class="catemp-btns_2">
+                <input class="btn" type="submit" value="Regresar" onclick='location.href="{% url "nomina:catalogos:cuadrilleros:lista" %}"' >
+            </div>
+        </div>
+            
+        <div class="catemp-grid_registro_cuadrilla">
+            <fieldset>
+                <form method="POST">{% csrf_token %}
+                    <div class="clasesform">
+                        <label>Nombre</label>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="clasesform3">
+                        <label>Codigo de Empresa</label>
+                        {{ form.empresa }}
+                    </div>
+                    <input class="btn" type="submit" value="Registrar" >
+                </form>
+            </fieldset>
+            <div id="error"></div>
+    </section>
+
+{% endblock contenido %}

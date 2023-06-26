@@ -1,0 +1,226 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Consulta de empleado {% endblock titulo %}
+{% block contenido %}
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Consulta de Empleado</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select"
+                href="{% url 'nomina:catalogos:empleados:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">
+            <div class="contenedorRegistro_empleados">
+                <div class="panel panel_default">
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos del Camion</h3>
+                        </div>
+                    </div>
+                    <div class="panel_body" id="formulario">
+                        <div class="cuadroFoto">
+                            <p></p>
+                        </div>
+                        <div class="grupo_formulario roll marginPerfil">
+                            <div class="colum_input" style="background: #c7cddd; border-radius: 8px;">
+                                <label>Codigo del trabajador</label>
+                                <input type=" number" placeholder="Codigo" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Fecha de alta</label>
+                                <input type="date" placeholder="Fecha" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Tipo de contrato</label>
+                                <select class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll marginPerfil">
+                            <div class="colum_input widthEmp">
+                                <label>Numero de tarjeta</label>
+                                <input type="number" placeholder="Numero de tarjeta" class="form_control">
+                            </div>
+                            <div class="colum_input widthEmp">
+                                <label>Cuenta de banco</label>
+                                <input type="Number" placeholder="Cuenta de banco" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll" style="background: #c7cddd; border-radius: 8px;">
+                            <div class="colum_input">
+                                <label>Apellido paterno</label>
+                                <input type="text" placeholder="Apellido paterno" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Apellido materno</label>
+                                <input type="text" placeholder="Apellido materno" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Nombre(s)</label>
+                                <input type="text" placeholder="Nombre(s)" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Fecha de nacimiento</label>
+                                <input type="text" placeholder="Fecha de nacimiento" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Tipo de periodo </label>
+                                <input type="text" placeholder="Periodo" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Salario base</label>
+                                <input type="number" placeholder="Nombre(s)" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Base cotización</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Tipo de ingreso</label>
+                                <input type="text" placeholder="Tipo de ingreso" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Puesto </label>
+                                <input type="text" placeholder="Puesto" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Integrado</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label>comida</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input  widthEmp">
+                                <label>Campo agrícola</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                            <div class="colum_input widthEmp">
+                                <label>Estatus</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Si</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel_default">
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Información general</h3>
+                        </div>
+                    </div>
+                    <div class="panel_body" id="formulario">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Numero de seguro social</label>
+                                <input type=" number" placeholder="Numero" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Numero de infonavit</label>
+                                <input type="number" placeholder="Numero" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>R.F.C</label>
+                                <input type="number" placeholder="RFC" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>CURP</label>
+                                <input type="number" placeholder="CURP" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Sexo</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Masculino</option>
+                                    <option value="">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label>Estado Civil</label>
+                                <select name="" class="form_control" id="">
+                                    <option value="">Soltero</option>
+                                    <option value="">Casado</option>
+                                    <option value="">Union libre</option>
+                                    <option value="">Divorciado</option>
+                                    <option value="">Viudo</option>
+                                </select>
+                            </div>
+                            <div class="colum_input">
+                                <label>Nombre de la madre</label>
+                                <input type="text" placeholder="Nombre de la madre" class="form_control">
+                            </div>
+                            <div class="colum_input">
+                                <label>Nombre del padre</label>
+                                <input type="text" placeholder="Nombre del padre" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input  widthEmp">
+                                <label>Domicilio</label>
+                                <input type="text" placeholder="Domicilio" class="form_control">
+                            </div>
+                            <div class="colum_input widthEmp">
+                                <label>Código postal</label>
+                                <input type="number" placeholder="Código" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input  widthEmp">
+                                <label>Lugar de nacimiento (Estado)</label>
+                                <input type="text" placeholder="Estado" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input  widthEmp">
+                                <label> Nombre del familiar(Referencia 1)</label>
+                                <input type="text" placeholder="Domicilio" class="form_control">
+                            </div>
+                            <div class="colum_input widthEmp">
+                                <label> Nombre del familiar(Referencia 2)</label>
+                                <input type="text" placeholder="Código" class="form_control">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input  widthEmp">
+                                <label>Teléfono Celular(Referencia 1)</label>
+                                <input type="number" placeholder="Domicilio" class="form_control">
+                            </div>
+                            <div class="colum_input widthEmp">
+                                <label>Teléfono Celular(Referencia 2)</label>
+                                <input type="number" placeholder="Código" class="form_control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%include 'home/conmon/btnMasEditar.html' %}
+            </div>
+        </div>
+</section>
+
+{% endblock contenido %}

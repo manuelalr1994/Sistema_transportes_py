@@ -1,0 +1,67 @@
+{% extends 'users/base_users.html' %}
+{% load static %}
+{% block titulo %} Registro de usuarios {% endblock titulo %}
+{% block contenido %}
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Usuarios</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'users_app:user_panel' %}">Retornar</a>
+        </div>
+            <div class="contenedorRegistro_empleados">
+                <form method='POST'> {% csrf_token %}
+                    <div class="panel panel_default">
+                            <div class="panel_heading">
+                                <h3>Registro de Usuario</h3>
+                            </div>
+                            <div class="panel_body">
+                                <div class="grupo_formulario roll">
+                                    <div class="colum_input">
+                                        <label>Nombre de Usuario</label>
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="colum_input">
+                                        <label>Nombres</label>
+                                        {{ form.nombres }}
+                                    </div>
+                                    <div class="colum_input">
+                                        <label>Apellidos</label>
+                                        {{ form.apellidos }}
+                                    </div>
+                                </div>
+                                <div class="grupo_formulario roll">
+                                    <div class="colum_input">
+                                        <label>Email</label>
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="colum_input">
+                                        <label>Sexo</label>
+                                        {{ form.genero }}
+                                    </div>
+                                    <div class="colum_input">
+                                        <label>Contraseña</label>
+                                        {{ form.password1 }}
+                                    </div>
+                                </div>
+                                <div class="grupo_formulario roll">
+                                    <div class="colum_input">
+                                        <label>Repetir Contraseña</label>
+                                        {{ form.password2 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botones">
+                            <input type="submit" class="btn seleccion save disable-select" value="Guardar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</select>
+
+{% endblock contenido %}

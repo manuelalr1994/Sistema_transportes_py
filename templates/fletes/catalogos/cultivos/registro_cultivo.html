@@ -1,0 +1,272 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Registro de cultivo {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Cultivo</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:cultivos:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">  
+            <div class="contenedorRegistro_empleados">
+                <form method="POST">{% csrf_token %}
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h3>Datos de la empresa</h3>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Código de cultivo</label>
+                                {{ formulario_cultivos.codigo }}
+                            </div>
+                            <div class="var_colum_input">
+                                <label>Nombre del cultivo</label>
+                                {{ formulario_cultivos.nombre }}
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Código de variedad</label>
+                                {{ formulario_variedades.codigo }}
+                            </div>
+                            <div class="var_colum_input">
+                                <label>Nombre de la variedad</label>
+                                {{ formulario_variedades.nombre }}
+                            </div>
+                        </div>
+                        <!--<div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Codigo de cuadro</label>
+                                <input type="number" class="form_control" placeholder="Escriba el codigo de cuadro">
+                            </div>
+                            <div class="var_colum_input">
+                                <label>Nombre del cuadro</label>
+                                <input type="number" class="form_control" placeholder="Escriba el nombre del cuadro">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="var_colum_input">
+                                <label>Codigo de lote</label>
+                                <input type="number" class="form_control" placeholder="Escriba el codigo de lote">
+                            </div>
+                            <div class="var_colum_input">
+                                <label>Nombre del lote</label>
+                                <input type="number" class="form_control" placeholder="Escriba el nombre del lote">
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input"></div>
+                            <div class="colum_input">
+                                <label>Has.</label>
+                                <input type="number" class="form_control" placeholder="Escriba el Has.">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <input id="boton_submit" type="button" class="btn seleccion save disable-select" value="Guardar">
+                </form>
+                
+            </div>
+
+            <label id="error"></label>
+
+            {% if formulario_cultivos.errors %}
+
+                {% for field in formulario_cultivos %}
+                    {% for error in field.errors %}
+                        <label> {{ error|escape }} </label>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in formulario_cultivos.non_field_errors %}
+                    <label> {{ error|escape }} </label>
+                {% endfor %}
+                    
+            {% endif %}
+
+
+            {% if formulario_variedades.errors %}
+
+                {% for field in formulario_variedades %}
+                    {% for error in field.errors %}
+                        <p> {{ error|escape }} </p>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in formulario_variedades.non_field_errors %}
+                    <p> {{ error|escape }} </p>
+                {% endfor %}
+                    
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+<!-------------------------------------------JAVASCRIPT------------------------------------------------->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!-- Este bloque se encarga de ir desbloqueando los campos conforme se llenan los campos
+de la secuencia, y hace las corroboraciones mediante la peticion AJAX  -->
+<script>
+    $(document).ready(function(){
+        $('#cultivo').change(function() {
+
+            console.log('entre a cultivo')
+
+            // Corroboramos si existe el cultivo, si existe retoran el nombre
+            // si no, habilita el campo para escribir sobre el
+            // Primeramente reseteamos todos los campos distintos a cultivo y los deshabilitamos
+            url = '{% url "fletes:catalogos:cultivos:cargarCultivos" %}'
+            $("#variedad").prop("value", '');
+            $("#variedad").prop("disabled", true);
+            $("#nombre_cultivo").prop("value", '');
+            $("#nombre_cultivo").prop("disabled", true);
+            $("#nombre_variedad").prop("value", '');
+            $("#nombre_variedad").prop("disabled", true);
+            var codigo_cultivo = $("#cultivo").val();
+            $.ajax({
+                url: url,
+                data: {
+                    "codigo_cultivo" : codigo_cultivo
+                },
+                success: function (data) {
+                    console.log(data['error'])
+                    console.log(!('error' in data))
+                    if (!('error' in data)){
+                        if(data['codigo_cultivo_numerico']){
+                            if(data['cultivo_existe']){
+                                console.log('si llegue a cultivo existe pah');
+                                console.log(data['nombre_cultivo']);
+                                $("#nombre_cultivo").prop("value", data['nombre_cultivo']);
+                                $("#nombre_cultivo").prop("placeholder", data['nombre_cultivo']);
+                                $("#nombre_variedad").prop("placeholder", '');
+                                $("#nombre_variedad").prop("value", '');
+                                // En caso de no haber errores, se limpia el apartado error
+                                $("#error").html('');
+
+                            }else{
+                                console.log('si entre en el disabled')
+                                $("#nombre_cultivo").prop("disabled", false);
+                                $("#nombre_cultivo").prop("placeholder", '');
+                                $("#nombre_cultivo").prop("value", '');
+                                $("#nombre_variedad").prop("value", '');
+                                $("#nombre_variedad").prop("placeholder", '');
+                                // En caso de no haber errores, se limpia el apartado error
+                                $("#error").html(''); 
+                            }
+                        }else{
+                            // Reseteamos los placeholders y values
+                            console.log(data['error'])
+                            $("#nombre_cultivo").prop("placeholder", '');
+                            $("#nombre_cultivo").prop("value", '');
+                            $("#nombre_variedad").prop("placeholder", '');
+                            $("#nombre_variedad").prop("value", '');
+                            $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                        }
+                    }else{
+                        console.log('estoy dentro de errores')
+                        console.log(data['error'])
+                        $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                    }
+                },
+                error: function(jqXHR, estado, error) {
+                    $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                }
+            });
+
+
+            // Se repite el proceso de Cultivo, pero tambien enviara el codigo del cultivo para
+            // consultar en la base de datos
+            $('#variedad').prop("disabled", false)
+            $('#variedad').change(function(){
+                url = "{% url 'fletes:catalogos:cultivos:cargarVariedades' %}"
+                var codigo_variedad = $("#variedad").val();
+                var codigo_cultivo = $("#cultivo").val();
+                $.ajax({
+                    url: url,
+                    data: {
+                        "codigo_variedad" : codigo_variedad,
+                        "codigo_cultivo" : codigo_cultivo
+                    },
+                    success: function (data) {
+                        console.log(data['codigo_variedad_numerico'])
+                        if(data['codigo_variedad_numerico']){
+                            if(data['variedad_existe']){
+                                console.log('si llegue a cultivo existe pah');
+                                console.log(data['nombre_variedad']);
+                                $("#nombre_variedad").prop("value", data['nombre_variedad']);
+                                $("#nombre_variedad").prop("placeholder", data['nombre_variedad']);
+                                console.log(data['nombre_variedad'])
+                                $("#nombre_variedad").prop("disabled", true);
+                                $("#error").html('');
+
+                            }else{
+                                $("#nombre_variedad").prop("disabled", false)
+                                $("#nombre_variedad").prop("placeholder", '');
+                                $("#nombre_variedad").prop("value", '');
+                                $("#error").html('');   
+                            }
+                        }else{
+                            console.log(data['error'])
+                            $("#nombre_variedad").prop("placeholder", '');
+                            $("#nombre_variedad").prop("value", '');
+                            $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+
+                        }
+                    },
+                    error: function(jqXHR, estado, error) {
+                        $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                    }
+                });
+
+            });
+
+
+        });
+
+        $("#boton_submit").click(function() {
+
+            var url_redirect = "{% url 'fletes:catalogos:cultivos:lista' %}"
+            var url = "{% url 'fletes:catalogos:cultivos:registrar' %}"
+            var nombre_cultivo = $('#nombre_cultivo').val()
+            var codigo_cultivo = $('#cultivo').val()
+            var nombre_variedad = $('#nombre_variedad').val()
+            var codigo_variedad = $('#variedad').val()
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'nombre_cultivo': nombre_cultivo,
+                    'codigo_cultivo': codigo_cultivo,
+                    'nombre_variedad': nombre_variedad,
+                    'codigo_variedad' : codigo_variedad
+                },
+                success: function (data) { 
+                    if (data['exitoso']){
+                        window.location = url_redirect
+                    }
+                    else {
+                        $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                    }
+                },
+                error: function(jqXHR, estado, error) {
+                    $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                }
+            });
+        });
+
+    });
+    
+</script>
+
+{% endblock contenido %}

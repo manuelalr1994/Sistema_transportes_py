@@ -1,0 +1,1027 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Modificación de captura fletera {% endblock titulo %}
+{% block contenido %}
+
+<!-- Modal de Modificacion -->
+
+<div class="modalContainer">
+    <div class="modal modalClose"> 
+        <p class="close" id="closeModal">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Modificación</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo:</label>
+                                    <input id="codigo_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Camion:</label>
+                                    <input id="nombre_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Tipo de semana:</label>
+                                    <input valor="" id="tipo_semana_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>N° semana:</label>
+                                    <input id="numero_semana_camion" class="form_control" type="text" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Costo Hora:</label>
+                                    <input id="costo_hra_camion" class="form_control" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel_default">
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll"> 
+                                <div class="overflow_modal">
+                                <table id="tabla_fechas" class="tab_mod_modal">
+                                    <thead class="thead_registro colorModal">
+                                        <tr>
+                                            <th>Dia</th>
+                                            <th>Campo Agricola</th>
+                                            <th>Cuadrillero</th>
+                                            <th>Plantacion</th>
+                                            <th>Variedad</th>
+                                            <th>Labor</th>
+                                            <th>Fecha</th>
+                                            <th>Entrada</th>
+                                            <th>Salida</th>
+                                            <th>Horas</th>
+                                            <th>Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in dias_semana %}
+                                        <tr>
+                                            <td> <input type="text" id="dia_{{ i }}" fila="{{ i }}" id_captura="" id_camion="" disabled></td>
+                                            <td><select id="campo_agricola_{{ i }}" fila="{{ i }}" disabled> 
+                                            </select></td>
+                                            <td><select id="cuadrillero_{{ i }}" fila="{{ i }}" tipo="cuadrillero"> 
+                                            </select></td>
+                                            <td><select id="plantacion_{{ i }}" fila="{{ i }}"> 
+                                            </select></td>
+                                            <td><select id="variedad_{{ i }}" fila="{{ i }}" tipo="variedad"> 
+                                            </select></td>
+                                            <td><select id="labor_{{ i }}" fila="{{ i }}"> 
+                                            </select></td>
+                                            <td> <input type="text" id="fecha_{{ i }}" fila="{{ i }}" disabled> </td>
+                                            <td> <input type="number" step="0.1" id="hora_entrada_{{ i }}" fila="{{ i }}" min="0" max="24"> </td>
+                                            <td> <input type="number" step="0.1" id="hora_salida_{{ i }}" fila="{{ i }}" min="0" max="24" > </td>
+                                            <td> <input type="number" step="0.1" id="total_hrs_{{ i }}" fila="{{ i }}" disabled> </td>
+                                            <td> <input type="number" step="0.1" id="importe_{{ i }}" fila="{{ i }}" disabled> </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div id="botones" class="botones">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pagina de listas e impresion -->
+
+<section class="listas">
+<div class="listas_recientes">
+<div class="encabezado_listas" id="var_encabezado"> 
+        <h2 class="titulo" id="var_titulo">Listado semanal de camiones</h2>
+    </div>
+    <div class="contenedorRegistro_empleados">
+        <form id="formulario_bitacora" method="post" action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+            <div class="panel panel_default panelModCamiones">
+                <div class="modCamiones">
+                    <b>Campo Agricola:</b>{{ form.campo_agricola }}
+                    <b>Tipo Semana:</b> <select name="tipo_semana" id="tipo_semana" class="form_control" required>
+                        <option value="">---selecciona tipo semana---</option>
+                    </select>
+                </div>
+                <div class="modCamiones">
+                    
+                    <b>Semana:</b> <select name="semana" id="semana" class="form_control elementoUno" required>
+                        <option value="">---selecciona semana---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="containerImprimir">
+                    <div class="checkboxImprimir marginArriba">
+                    <label>Seleccionar todos:</label>
+                        <input type="checkbox" id="selectAll" onclick='checkUncheck(this)'>
+                    </div>
+                    <div class="imprimirMod colorImprimirVar">
+                        <input type="button" id="reporte_bitacora" value="Imprimir bitácora">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel_default fontSize">
+                <div class="panel_body">
+                    <div class="grupo_formulario roll"> 
+                        <div class="overflow_mod_cam">
+                        <table id="tabla_fechas" class="tab_mod_camiones">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Horas</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Sub Total</th>
+                                    <th>Diésel</th>
+                                    <th>Comidas</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th>Ver</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contenido_tabla_capturas">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="error"></div>
+    </div>
+</div>
+</section>
+
+
+
+<!------------------ JAVASCRIPT --------------------->
+
+<script src="../../../../static/js/modal.js"></script>
+<script src="../../../../static/js/funciones.js"></script>
+<script src="{% static 'js/decimal.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+
+        // VARIABLES GLOBALES
+        capturas = {}
+
+        // Cuando se realiza una carga de capturas, primero se deben traer las opciones de
+        // los select del servidor y luego revisar entre todas las opciones a ver cual 
+        // coincide con la opcion registrada en la captura.
+        // Estas variables se encargan de decirles a la funcion de carga si la seleccion de
+        // empresa y cultivo se hicieron a traves de la carga de la captura (en automatico),
+        // cuando la carga de captura realiza la carga, convierte en true estas variables
+        // una vez ya fueron usadas una vez, ya no se pueden volver a usar hasta que se haga
+        // otra carga de captura y se restablezcan como true estas variables.
+        var hacer_match_variedad = false
+        var hacer_match_cuadrillero = false
+
+        // AJAX request del modulo de modificacion
+        $("#campo_agricola").change(function () {
+            var empresa_id = $(this).val();
+
+            if (empresa_id.length > 0){
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarTipoSemana' %}",
+                    data: {
+                        'empresa': empresa_id
+                    },
+                    success: function (data) {
+                        $("#tipo_semana").html(data);
+                    }
+                });
+            }
+            else {
+                $("#tipo_semana").html('<option value="">---selecciona tipo semana---</option>');
+            }
+                
+
+        });
+
+
+        $("#tipo_semana").change(function () {
+            var tipo_semana_id = $(this).val();
+
+            if (tipo_semana_id.length > 0){
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarSemana' %}",
+                    data: {
+                        'tipo_semana': tipo_semana_id
+                    },
+                    success: function (data) {
+                        $("#semana").html(data);
+                    }
+                });
+            }
+            else {
+                $("#semana").html('<option value="">---selecciona semana---</option>');
+            }
+
+        });
+
+
+        $('#campo_agricola, #tipo_semana, #semana').change(function() {
+            var empresa_id = $('#campo_agricola').val()
+            var tipo_semana_id = $('#tipo_semana').val()
+            var semana_id = $('#semana').val()
+
+            if(empresa_id.length > 0 && tipo_semana_id.length > 0 && semana_id.length > 0){
+                $.ajax({ 
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarListaCapturas' %}",
+                    data: {
+                        'empresa' : empresa_id,
+                        'tipo_semana' : tipo_semana_id,
+                        'semana' : semana_id
+                    },
+                    success: function (data) {
+                        $('#contenido_tabla_capturas').html(data)
+                    }
+                });
+            }
+
+        });
+
+
+        $("#boton_submit").click(function(){
+            var url_redirect = "{% url 'fletes:procesos:capturas_fleteras:modificar' %}"
+            var url = "{% url 'fletes:procesos:capturas_fleteras:modificar' %}"
+            var tipo_semana = $("#tipo_semana_camion").attr("valor")
+            var semana = $("#numero_semana_camion").val()
+            var camion = $("#dia_1").attr("id_camion")
+            var costo_hra = $("#costo_hra_camion").val()
+            var empresa_original = $("#campo_agricola").val()
+            var id_capturas = []
+            var empresas = []
+            var cuadrilleros = []
+            var cultivos = []
+            var variedades = []
+            var labores = []
+            var fechas = []
+            var horas_entrada = []
+            var horas_salida = []
+            var total_hrs = []
+            var importes = []
+
+            // Se añaden a las listas los campos de la tabla que si tienen valores
+            for(let i = 1; i < 8; i++){
+
+                try {
+
+                    if($("#campo_agricola_"+i).val().length > 0 && $("#cuadrillero_"+i).val().length > 0 &&
+                    $("#plantacion_"+i).val().length > 0 && $("#variedad_"+i).val().length > 0 && 
+                    $("#labor_"+i).val().length > 0 && $("#fecha_"+i).val().length > 0 && 
+                    $("#hora_entrada_"+i).val().length > 0 && $("#hora_salida_"+i).val().length > 0 && 
+                    $("#costo_hra_camion").val().length > 0 && $("#total_hrs_"+i).val().length > 0 && 
+                    $("#importe_"+i).val().length > 0){
+
+                        id_capturas.push($("#dia_"+i).attr("id_captura"))
+                        empresas.push($("#campo_agricola_"+i).val())
+                        cuadrilleros.push($("#cuadrillero_"+i).val())
+                        cultivos.push($("#plantacion_"+i).val())
+                        variedades.push($("#variedad_"+i).val())
+                        labores.push($("#labor_"+i).val())
+                        fechas.push($("#fecha_"+i).val())
+                        horas_entrada.push($("#hora_entrada_"+i).val())
+                        horas_salida.push($("#hora_salida_"+i).val())
+                        total_hrs.push($("#total_hrs_"+i).val())
+                        importes.push($("#importe_"+i).val())
+
+                    }
+                    
+                } catch (error) {
+                    // pass (no se hace nada, es solo para que controle el error)
+                }
+
+                
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'empresa_original' : empresa_original, // Esta es la empresa a la que se le estan modificando sus capturas,
+                    // si agarrara una de la lista previamente creada en base a los campos de modificacion de captura, no sabria
+                    // si es la misma empresa, ya que pudo ser modificada, por eso mejor se agarra desde el campo empresa de la lista
+                    // para asegurar que esa es la que tiene los registros de esas capturas en la base de datos
+                    'tipo_semana' : tipo_semana,
+                    'semana' : semana,
+                    'camion' : camion,
+                    'costo_hra' : costo_hra,
+                    'id_capturas' : id_capturas,
+                    'empresas': empresas,
+                    'cuadrilleros' : cuadrilleros,
+                    'cultivos' : cultivos,
+                    'variedades' : variedades,
+                    'labores' : labores,
+                    'fechas' : fechas,
+                    'horas_entrada' : horas_entrada,
+                    'horas_salida' : horas_salida,
+                    'total_hrs' : total_hrs,
+                    'importes' : importes
+                },
+                success: function (data) { 
+                    if (data['exitoso']){
+                        window.location = url_redirect
+                    }
+                    else {
+                        $("#error").html('<p style="color: red;">'+ data['error'] +'</p>');
+                    }
+                },
+                error: function(jqXHR, estado, error) {
+                    $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>');
+                }
+            });
+        })
+
+
+        // ---------------------------- PETICIONES AJAX VENTANA MODFICACION --------------------------------
+
+        // Cargamos los datos del camion y los dias de la captura de ese camion, una vez se le dio click al boton 
+        // modificar de la captura de ese camion especifico en la lista
+        $('#contenido_tabla_capturas').on("click", ".imgEditar", function() {
+
+            var camion = $(this).attr("camion_id")
+            var empresa = $('#campo_agricola').val()
+            var tipo_semana = $('#tipo_semana > option:selected').text()
+            var tipo_semana_val = $("#tipo_semana").val()
+            var semana = $('#semana').val()
+
+            $("#codigo_camion").prop('value', "");
+            $("#nombre_camion").prop('value', "");
+            $("#tipo_semana_camion").prop('value', "");
+            $("#numero_semana_camion").prop('value', "");
+            $("#costo_hra_camion").prop('value', "");
+
+            // Reiniciamos los campos del modal de modificacion de captura
+            for(let fila = 1; fila < 8; fila++){
+                $('#dia_'+fila).prop('value', '')
+                $('#campo_agricola_'+fila).prop('value', '')
+                $('#cuadrillero_'+fila).prop('value', '')
+                $('#plantacion_'+fila).prop('value', '')
+                $('#variedad_'+fila).prop('value', '')
+                $('#labor_'+fila).prop('value', '')
+                $('#fecha_'+fila).prop('value', '')
+                $('#hora_entrada_'+fila).prop('value', '')
+                $('#hora_salida_'+fila).prop('value', '')
+                $('#total_hrs_'+fila).prop('value', '')
+                $('#importe_'+fila).prop('value', '')
+            }
+
+            // Se cargan los datos de la cabecera de la pantalla
+            // de modificar a excepcion de la informacion del camion,
+            // esa se carga cuando llega la peticion AJAX
+            $("#tipo_semana_camion").prop('value', tipo_semana);
+            $("#tipo_semana_camion").attr('valor', tipo_semana_val);
+            $("#numero_semana_camion").prop('value', semana);
+
+            
+
+            if(empresa.length > 0 && camion.length > 0 && semana.length > 0){
+
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarCaptura' %}",
+                    data: {
+                        'camion' : camion,
+                        'empresa' : empresa,
+                        'semana' : semana,
+                    },
+                    success: function (data) {
+                        capturas = data['lista_capturas']
+                        cant_capturas = data['cant_capturas']
+                        empresas = data['empresas']
+                        labores = data['labores']
+                        camion = data['camion']
+                        semana_cerrada = data['semana_cerrada']
+
+
+                        // Se especifica el set de botones segun si la semana fue cerrada o no
+                        if(!semana_cerrada){
+                            $('#botones').html('<input type="button" id="eliminar_captura" class="btn seleccion_ch delete disable-select" value="Eliminar"><input type="button" id="boton_submit" class="btn seleccion_ch save disable-select" value="Guardar"><input type="button" id="reiniciar_captura" class="btn seleccion_ch restart disable-select" value="Reiniciar">')
+                        }
+                        else{
+                            $('#botones').html('')
+                        }
+
+                        // Ponemos la informacion del camion en sus campos pertinentes
+                        $("#costo_hra_camion").prop('value', camion.costo_hra);
+                        $('#codigo_camion').prop('value', camion.codigo);
+                        $('#nombre_camion').prop('value', camion.nombre);
+
+
+                        for(let i = 1; i < cant_capturas; i++){
+
+                            // Ponemos las opciones en los campos select de empresa, labor y plantacion (es lo mismo 
+                            // que cultivo). Ademas, activamos los campos previamente desactivados (por que si estamos)
+                            // aqui significa que esta captura existe y por tanto esta fila puede ser modificada
+                            $('#campo_agricola_'+i).html(data['empresas_html'])
+                            $('#labor_'+i).html(data['labores_html'])
+                            $('#labor_'+i).prop('disabled', false)
+                            $('#plantacion_'+i).html(data['cultivos_html'])
+                            $('#plantacion_'+i).prop('disabled', false)
+
+                            // Habilitamos los otros campos restantes de la ventana de modificacion
+                            $('#variedad_'+i).prop('disabled', false)
+                            $('#cuadrillero_'+i).prop('disabled', false)
+                            $('#labor_'+i).prop('disabled', false)
+
+
+                            // Buscamos entre las opciones recabadas del servidor, el campo agricola que corresponde 
+                            // a este dia de la captura para este camion y la seleccionamos (las capturas 
+                            // y las filas estan indexadas de la misma manera, dia 1, indice 1 en capturas)
+                            $('#campo_agricola_'+i+' > option').each(function() {
+                                if(this.value == capturas[i].campo_agricola){
+                                    $(this).prop("selected", true)
+                                    $("#campo_agricola_"+i).trigger("change")
+                                    hacer_match_cuadrillero = true
+                                }
+                            });
+
+                            // Buscamos entre las opciones recabadas del servidor, la labor que corresponde 
+                            // a este dia de la captura para este camion y la seleccionamos (las capturas 
+                            // y las filas estan indexadas de la misma manera, dia 1, indice 1 en capturas)
+                            $('#labor_'+i+' > option').each(function() {
+                                if(this.value == capturas[i].labor){
+                                    $(this).prop("selected", true)
+                                    $("#labor_"+i).trigger("change")
+                                }
+                            });
+
+                            // Buscamos entre las opciones recabadas del servidor, la labor que corresponde 
+                            // a este dia de la captura para este camion y la seleccionamos (las capturas 
+                            // y las filas estan indexadas de la misma manera, dia 1, indice 1 en capturas)
+                            $('#plantacion_'+i+' > option').each(function() {
+                                
+                                if(this.value == capturas[i].cultivo){
+                                    $(this).prop("selected", true)
+                                    $("#plantacion_"+i).trigger("change")
+                                    hacer_match_variedad = true
+                                }
+                            });
+
+                            // Rellenamos los campos que no son select
+                            $('#dia_'+i).prop('value', capturas[i].dia)
+
+                            $('#fecha_'+i).prop('value', capturas[i].fecha)
+
+                            $('#hora_entrada_'+i).prop('value', capturas[i].hora_entrada)
+                            $('#hora_entrada_'+i).prop('disabled', false)
+
+                            $('#hora_salida_'+i).prop('value', capturas[i].hora_salida)
+                            $('#hora_salida_'+i).prop('disabled', false)
+
+                            $('#total_hrs_'+i).prop('value', capturas[i].total_hrs)
+
+                            $('#importe_'+i).prop('value', capturas[i].importe)
+
+
+                            // Ponemos el id de la captura en el campo de dia como referencia
+                            // al momento de actualizar los registros en la base de datos
+                            $('#dia_'+i).attr('id_captura', capturas[i].id_captura)
+
+                            // Ponemos el id del camion en el campo de dia como referencia
+                            // al momento de mandar la informacion a la base de datos (mandar id)
+                            $('#dia_'+i).attr('id_camion', camion.id)
+
+                        }
+
+                        // Se desactivan las filas en caso de que la semana ya haya sido cerrada
+                        if(semana_cerrada){
+                            for(let i = 1; i < 8; i++){
+                                $('#campo_agricola_'+i).prop('disabled', true)
+                                $('#cuadrillero_'+i).prop('disabled', true)
+                                $('#plantacion_'+i).prop('disabled', true)
+                                $('#variedad_'+i).prop('disabled', true)
+                                $('#labor_'+i).prop('disabled', true)
+                                $('#hora_entrada_'+i).prop('disabled', true)
+                                $('#hora_salida_'+i).prop('disabled', true)
+                            }
+                        }
+
+                        // Se desactivan las filas que no van a tener capturas (basados en la 
+                        // cantidad de capturas definidas)
+                        for(let i = cant_capturas; i < 8; i++){
+                            $('#campo_agricola_'+i).prop('disabled', true)
+                            $('#cuadrillero_'+i).prop('disabled', true)
+                            $('#plantacion_'+i).prop('disabled', true)
+                            $('#variedad_'+i).prop('disabled', true)
+                            $('#labor_'+i).prop('disabled', true)
+                            $('#hora_entrada_'+i).prop('disabled', true)
+                            $('#hora_salida_'+i).prop('disabled', true)
+                        }
+
+                    }
+                });
+            }
+        });
+
+        // FUNCIONES DE CARGA DE PETICIONES AJAX
+        function cargarVariedad(fila){
+            var cultivo_id = $("#plantacion_"+fila).val();
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarVariedad' %}",
+                data: {
+                    'cultivo': cultivo_id
+                },
+                success: function (data) {
+                    $("#variedad_"+fila).html(data);
+                }
+            });
+        }
+
+        function cargarCuadrillero(fila){
+            var empresa_id = $("#campo_agricola_"+fila).val();
+
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarCuadrillero' %}",
+                data: {
+                    'empresa': empresa_id
+                },
+                success: function (data) {
+                    $("#cuadrillero_"+fila).html(data);
+                }
+            });
+
+        }
+
+        function matchVariedad(fila){
+            if(hacer_match_variedad){
+                $('#variedad_'+fila+' > option').each(function() {
+                    if(this.value == capturas[fila].variedad){
+                        $(this).prop("selected", true)
+                        $("#variedad_"+fila).trigger("change")
+                    }
+                });
+            }
+
+        }
+
+        function matchCuadrillero(fila){
+            if(hacer_match_cuadrillero){
+                $('#cuadrillero_'+fila+' > option').each(function() {
+
+                    if(this.value == capturas[fila].cuadrillero){
+                        $(this).prop("selected", true)
+                        $("#cuadrillero_"+fila).trigger("change")
+                    }
+                });
+            }
+
+        }
+
+
+        // --------------- PETICIONES AJAX DE LOS CAMPOS DE LA TABLA MODIFICAR ------------------
+
+        // Definimos el Mutation Observer
+        const mutationObserver = new MutationObserver((mutationList) => {
+            mutationList.forEach((mutation) => {
+                select_mutado = mutation.target
+                tipo = select_mutado.getAttribute('tipo')
+
+                // Segun el tipo de select que se este tratando (cuadrillero o variedad), 
+                // se ejecuta una accion o otra
+                if(tipo == "variedad"){
+                    if(mutation.addedNodes.length || mutation.removedNodes.length){
+                        $('#'+select_mutado.id+' > option').each(function() {
+                            if(this.value == capturas[select_mutado.getAttribute('fila')].variedad){
+                                $(this).prop("selected", true)
+                                $("#"+select_mutado.id).trigger("change")
+                            }
+                        });
+                    }
+                }
+                else if (tipo == "cuadrillero"){
+
+                    if(mutation.addedNodes.length || mutation.removedNodes.length){
+                        $('#'+select_mutado.id+' > option').each(function() {
+                            if(this.value == capturas[select_mutado.getAttribute('fila')].cuadrillero){
+                                $(this).prop("selected", true)
+                                $("#"+select_mutado.id).trigger("change")
+                            }
+                        });
+                    }
+                }
+
+                
+            })
+        })
+
+        // ------------- Carga de peticiones AJAX Fila 1
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_1 = document.querySelector("#variedad_1")
+        const cuadrillero_1 = document.querySelector("#cuadrillero_1")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_1, { childList: true })
+        mutationObserver.observe(cuadrillero_1, { childList: true })
+
+        $("#plantacion_1").change(function () {
+            fila = 1
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_1").change(function () {
+            fila = 1
+            cargarCuadrillero(fila)
+        });
+        
+
+        // ------------- Carga de peticiones AJAX Fila 2
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_2 = document.querySelector("#variedad_2")
+        const cuadrillero_2 = document.querySelector("#cuadrillero_2")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_2, { childList: true })
+        mutationObserver.observe(cuadrillero_2, { childList: true })
+
+        $("#plantacion_2").change(function () {
+            fila = 2
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_2").change(function () {
+            fila = 2
+            cargarCuadrillero(fila)
+        });
+
+        // ------------- Carga de peticiones AJAX Fila 3
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_3 = document.querySelector("#variedad_3")
+        const cuadrillero_3 = document.querySelector("#cuadrillero_3")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_3, { childList: true })
+        mutationObserver.observe(cuadrillero_3, { childList: true })
+
+        $("#plantacion_3").change(function () {
+            fila = 3
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_3").change(function () {
+            fila = 3
+            cargarCuadrillero(fila)
+        });
+
+        // ------------- Carga de peticiones AJAX Fila 4
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_4 = document.querySelector("#variedad_4")
+        const cuadrillero_4 = document.querySelector("#cuadrillero_4")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_4, { childList: true })
+        mutationObserver.observe(cuadrillero_4, { childList: true })
+
+        $("#plantacion_4").change(function () {
+            fila = 4
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_4").change(function () {
+            fila = 4
+            cargarCuadrillero(fila)
+        });
+
+        // ------------- Carga de peticiones AJAX Fila 5
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_5 = document.querySelector("#variedad_5")
+        const cuadrillero_5 = document.querySelector("#cuadrillero_5")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_5, { childList: true })
+        mutationObserver.observe(cuadrillero_5, { childList: true })
+
+        $("#plantacion_5").change(function () {
+            fila = 5
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_5").change(function () {
+            fila = 5
+            cargarCuadrillero(fila)
+        });
+
+        // ------------- Carga de peticiones AJAX Fila 6
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_6 = document.querySelector("#variedad_6")
+        const cuadrillero_6 = document.querySelector("#cuadrillero_6")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_6, { childList: true })
+        mutationObserver.observe(cuadrillero_6, { childList: true })
+
+        $("#plantacion_6").change(function () {
+            fila = 6
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_6").change(function () {
+            fila = 6
+            cargarCuadrillero(fila)
+        });
+
+        // ------------- Carga de peticiones AJAX Fila 7
+
+        // Seleccionamos los Select que se van a observar
+        const variedad_7 = document.querySelector("#variedad_7")
+        const cuadrillero_7 = document.querySelector("#cuadrillero_7")
+
+        // Ponemos al observer a observar los campos Select
+        // previamente seleccionados
+        mutationObserver.observe(variedad_7, { childList: true })
+        mutationObserver.observe(cuadrillero_7, { childList: true })
+
+        $("#plantacion_7").change(function () {
+            fila = 7
+            cargarVariedad(fila)
+        });
+
+        $("#campo_agricola_7").change(function () {
+            fila = 7
+            cargarCuadrillero(fila)
+        });
+
+        // ---------------------------- CALCULOS DE TABLA --------------------------------
+
+        function calcularFila(fila){
+
+            var fecha = $("#fecha_"+fila).val();
+            var hora_entrada = new Decimal(parseFloat($("#hora_entrada_"+fila).val()));
+            var hora_salida = new Decimal(parseFloat($("#hora_salida_"+fila).val()));
+            var costo_hra = new Decimal(parseFloat($("#costo_hra_camion").val()));
+            var total_hrs = 0;
+            var importe;
+
+            // Calculamos y mostramos el total de horas, corroboramos en if si alguna de las horas estaba vacia
+            if(!isNaN(hora_entrada.toNumber()) && !isNaN(hora_salida.toNumber())) {
+
+                // Separamos los minutos de las horas y calculamos los minutos por separado para
+                // despues añadirlos a las hrs_totales, extrarmos los decimales de las horas recabadas
+                // y, una vez guardados, se lo quitamos a la parte entera (hora_entrada y salida)
+                entrada_parte_decimal = new Decimal(hora_entrada.sub(Math.floor(hora_entrada.toNumber())))
+                salida_parte_decimal = new Decimal(hora_salida.sub(Math.floor(hora_salida.toNumber())))
+                hora_entrada = new Decimal(Math.floor(hora_entrada.toNumber()))
+                hora_salida = new Decimal(Math.floor(hora_salida.toNumber()))
+                cero_sesenta = new Decimal(0.60)
+
+                // En caso de que la hora de entrada sea mayor a la de salida, significa que la jornada
+                // termino al dia siguiente, por ende la diferencia de horas se saca restandole a 24
+                // horas la hora de entrada y sumando la hora de salida, en caso de que no sea mayor la
+                // hora de entrada, se hace la resta normal
+                if (hora_entrada.toNumber() > hora_salida.toNumber()){
+                    dia_completo = new Decimal(24)
+                    total_hrs = new Decimal(dia_completo.sub(hora_entrada).add(hora_salida))
+                }else{
+                    total_hrs = new Decimal(hora_salida.sub(hora_entrada))
+                }
+
+                // Si tenemos 5:30 y 7:20, la diferencia nos va a dar 1:50 horas
+                // pero la diferencia de la parte entera sera 2, por lo que hay que
+                // restarle uno a esa diferencia en caso de que la parte decimal de
+                // la hora de entrada sea mayor a la de salida
+                if (entrada_parte_decimal.toNumber() > salida_parte_decimal.toNumber()){
+                    hora_salida = hora_salida.sub(1)
+                    // Se usa el toNumber() para poder hacer la comparacion del numero en el switch
+                    parte_decimal = salida_parte_decimal.add(cero_sesenta.sub(entrada_parte_decimal)).toNumber()
+
+                } else {
+                    // Se usa el toNumber() para poder hacer la comparacion del numero en el switch
+                    parte_decimal = new Decimal(salida_parte_decimal.sub(entrada_parte_decimal)).toNumber()
+
+                }
+
+                // Le asignamos el decimal en horas totales segun el rango en que se encuentre pero
+                // ya para poder operar con el, por ejemplo, .30 (media hora) = .50 en hrs totales
+                switch(true) {
+
+                    case parte_decimal >= 0.10 && parte_decimal <= 0.24:
+                        parte_decimal = 0.25;
+                        break;
+
+                    case parte_decimal >= 0.25 && parte_decimal <= 0.39:
+                        parte_decimal = 0.50;
+                        break;
+
+                    case parte_decimal >= 0.40 && parte_decimal <= 0.54:
+                        parte_decimal = 0.75;
+                        break;
+
+                    case parte_decimal >= 0.55:
+                        parte_decimal = 1;
+                        break;
+                        
+                    default:
+                        parte_decimal = 0;
+                        break;
+
+                }
+
+                parte_decimal = new Decimal(parte_decimal)
+                total_hrs = parte_decimal.add(total_hrs).toNumber()
+                total_hrs = total_hrs.toFixed(2)
+                $("#total_hrs_"+fila).prop("value", total_hrs)
+                $("#total_hrs_"+fila).trigger("change")
+            }
+
+            // Calculamos el importe y lo mostramos
+            if(!isNaN(hora_entrada.toNumber()) && !isNaN(hora_salida.toNumber()) &&
+            !isNaN(costo_hra.toNumber()) && total_hrs != undefined) {
+                importe = costo_hra.mul(total_hrs).toFixed(2);
+                $("#importe_"+fila).prop("value", importe);
+                $("#importe_"+fila).trigger("change");
+            }
+        }
+
+        // Calculamos la Formula de la Tabla segun su fila utilizando la funcion calcularFila()
+        $("#hora_entrada_1, #hora_salida_1, #costo_hra_1").change(function() {
+            calcularFila(1)
+        });
+
+        $("#hora_entrada_2, #hora_salida_2, #costo_hra_2").change(function() {
+            calcularFila(2)
+        });
+        
+        $("#hora_entrada_3, #hora_salida_3, #costo_hra_3").change(function() {
+            calcularFila(3)
+        });
+
+        $("#hora_entrada_4, #hora_salida_4, #costo_hra_4").change(function() {
+            calcularFila(4)
+        });
+
+        $("#hora_entrada_5, #hora_salida_5, #costo_hra_5").change(function() {
+            calcularFila(5)
+        });
+
+        $("#hora_entrada_6, #hora_salida_6, #costo_hra_6").change(function() {
+            calcularFila(6)
+        });
+
+        $("#hora_entrada_7, #hora_salida_7, #costo_hra_7").change(function() {
+            calcularFila(7)
+        });
+
+        // Mostramos el Total de Importe
+        $("#importe_1, #importe_2, #importe_3, #importe_4, #importe_5, #importe_6, #importe_7").change(function() {
+            
+            importes = {}
+            importes.importe_1 = parseFloat($('#importe_1').val())
+            importes.importe_2 = parseFloat($('#importe_2').val())
+            importes.importe_3 = parseFloat($('#importe_3').val())
+            importes.importe_4 = parseFloat($('#importe_4').val())
+            importes.importe_5 = parseFloat($('#importe_5').val())
+            importes.importe_6 = parseFloat($('#importe_6').val())
+            importes.importe_7 = parseFloat($('#importe_7').val())
+
+            for(let i=1; i<8; i++){
+                if (isNaN(importes["importe_"+i])){
+                    importes["importe_"+i] = 0;
+                }
+            }
+
+            importe_1 = new Decimal(importes.importe_1)
+            importe_2 = new Decimal(importes.importe_2)
+            importe_3 = new Decimal(importes.importe_3)
+            importe_4 = new Decimal(importes.importe_4)
+            importe_5 = new Decimal(importes.importe_5)
+            importe_6 = new Decimal(importes.importe_6)
+            importe_7 = new Decimal(importes.importe_7)
+
+            total_importe = importe_1.add(importe_2).add(importe_3).add(importe_4).add(importe_5).add(importe_6).add(importe_7)
+            $("#total_importe").prop("value", total_importe.toNumber());
+
+        });
+
+        // Mostramos Total de Horas
+        $("#total_hrs_1, #total_hrs_2, #total_hrs_3, #total_hrs_4, #total_hrs_5, #total_hrs_6, #total_hrs_7").change(function() {
+            
+            lista_horas = {}
+            lista_horas.total_hrs_1 = parseFloat($('#total_hrs_1').val())
+            lista_horas.total_hrs_2 = parseFloat($('#total_hrs_2').val())
+            lista_horas.total_hrs_3 = parseFloat($('#total_hrs_3').val())
+            lista_horas.total_hrs_4 = parseFloat($('#total_hrs_4').val())
+            lista_horas.total_hrs_5 = parseFloat($('#total_hrs_5').val())
+            lista_horas.total_hrs_6 = parseFloat($('#total_hrs_6').val())
+            lista_horas.total_hrs_7 = parseFloat($('#total_hrs_7').val())
+
+            for(let i=1; i<8; i++){
+                if (isNaN(lista_horas["total_hrs_"+i])){
+                    lista_horas["total_hrs_"+i] = 0;
+                }
+            }
+
+            total_hrs_1 = new Decimal(lista_horas.total_hrs_1)
+            total_hrs_2 = new Decimal(lista_horas.total_hrs_2)
+            total_hrs_3 = new Decimal(lista_horas.total_hrs_3)
+            total_hrs_4 = new Decimal(lista_horas.total_hrs_4)
+            total_hrs_5 = new Decimal(lista_horas.total_hrs_5)
+            total_hrs_6 = new Decimal(lista_horas.total_hrs_6)
+            total_hrs_7 = new Decimal(lista_horas.total_hrs_7)
+
+            total_hrs = total_hrs_1.add(total_hrs_2).add(total_hrs_3).add(total_hrs_4).add(total_hrs_5).add(total_hrs_6).add(total_hrs_7)
+            $("#total_hrs").prop("value", total_hrs.toNumber());
+        });
+
+        // ---------------------------- REPORTES --------------------------------
+        $('#reporte_listado_camiones').click( function(){
+
+            empresa_id = $('#campo_agricola').val()
+            tipo_semana_id = $('#tipo_semana').val()
+            semana_id = $('#semana').val()
+
+            if(empresa_id.length > 0 && tipo_semana_id.length > 0 && semana_id.length > 0){
+                
+                window.open("{% url 'fletes:procesos:capturas_fleteras:reporteListadoCamiones'%}"+"?empresa="+empresa_id
+                            +"&tipo_semana="+tipo_semana_id+"&semana="+semana_id)
+
+            }else {
+
+                if(!empresa_id.length > 0){
+                    alert("Debe seleccionar un campo agricola")
+                }
+                else if(!tipo_semana_id.length > 0){
+                    alert("Debe seleccionar un tipo semana")
+                }
+                else if(!semana_id.length > 0){
+                    alert("Debe seleccionar un numero de semana")
+                }
+
+            }
+
+        });
+
+        $('#reporte_bitacora').click(function(){
+
+            $('#formulario_bitacora').submit()
+
+        })
+
+        let lista_abrir = document.getElementById ("contenido_tabla_capturas");
+        lista_abrir.addEventListener("click", function(e){
+            const elemento_accionado = e.target;
+            if (elemento_accionado.matches(".imgVer")){
+
+                semana_id = $('#semana').val()
+                camion_id = elemento_accionado.getAttribute("camion_id")
+
+                if(camion_id.length > 0 && semana_id.length > 0){
+                    
+                    window.open("{% url 'fletes:procesos:capturas_fleteras:reporteBitacora'%}"+"?semana="+semana_id
+                                +"&camion="+camion_id)
+
+                }else {
+
+                    if(!camion_id.length > 0){
+                        alert("Debe elegir un id de camion")
+                    }
+                    else if(!semana_id.length > 0){
+                        alert("Debe seleccionar una semana")
+                    }
+
+                }
+
+            }
+        });
+
+    });
+
+</script>
+
+{% endblock contenido %}

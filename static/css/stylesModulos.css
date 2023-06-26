@@ -1,0 +1,263 @@
+:root {
+    --color-primary: #E28101;
+    --color-secondary: #54595F;
+    --color-text: #7A7A7A;
+    --color-accent: #61CE70;
+    --color-473552c8: #000;
+    --color-5f0d913: #FFF;
+    --color-f6aecf8: #0F4C75;
+    --primario_claro:#3282B8;
+}
+
+.MenuPrincipal{
+    font-family: mulish;
+    font-size: 15px;
+    line-height: 2.1;
+    letter-spacing: .8px;
+    word-wrap: break-word;
+    font-weight: 400;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.rulesImages, .imageCows, .imageLivestock{
+    
+    position: fixed;
+    width: 30%;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    z-index: 21;
+    transition: all 0.7s ease;
+}
+
+.imageCows {
+    background: var(--primario_claro);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.imageLivestock {
+    background: var(--primario_claro);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.firstMenu {
+    position: fixed;
+    z-index: 112;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-weight: 600;
+    width: 114px;
+}
+
+.firstMenu ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.firstMenu ul li a{
+    text-decoration: none;
+    color: var(--color-473552c8);
+    padding: 50px 5px 0px 5px;
+    display: inline-block;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.firstMenu ul li {
+    transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.firstMenu ul li:hover{
+    background-color: var(--color-f6aecf8);
+    transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 3px;
+}
+
+.firstMenu ul li a:hover {
+    color: var(--color-5f0d913);
+}
+
+
+/* .activeMenu {
+    background-color: var(--color-f6aecf8);
+}
+
+.activeMenu a{
+    color: #FFF !important;
+} */
+
+.imgVaca {
+    background: url(../img/Iconos/nomina.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 40px 7px;
+}
+
+.imgVaca:hover{
+    background: url(../img/Iconos/nomina_white.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 40px 7px;
+}
+.imgAtras {
+    background: url(../img/Iconos/atras.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 36px 7px;
+}
+
+.imgAtras:hover{
+    background: url(../img/Iconos/atras_white.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 36px 7px;
+}
+
+.imgPasto {
+    background: url(../img/Iconos/fletes.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 37px 11px;
+}
+
+.imgPasto:hover {
+    background: url(../img/Iconos/fletes_white.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 37px 11px;
+}
+
+.imgCasa {
+    background: url(../img/Iconos/facturacion.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 39px 8px;
+}
+
+.imgCasa:hover {
+    background: url(../img/Iconos/facrutacion_white.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   background-size: 43px;
+    background-position: 39px 8px;
+}
+.imgUbicacion {
+    background: url(../img/Iconos/ubicacion.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 43px;
+    background-position: 36px 8px;
+}
+
+.imgUbicacion:hover {
+    background: url(../img/Iconos/ubicacion_white.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   background-size: 43px;
+    background-position: 36px 8px;
+}
+
+.sectionMenu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 30%;
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 8;
+}
+
+.menuJc .containerMenuJc{
+    width: 100%;
+    height: 100vh;
+    float: left;
+    clear: both;
+    position: relative;
+}
+.moduloName{
+    width: 65.5%;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.moduloName h3 {
+    font-size: 50px;
+    font-weight: 800;
+    margin-bottom: -172px;
+}
+
+.moduloName .coloring {
+    color: var(--color-f6aecf8);
+}
+
+.subTextMenu {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.posicionMenu {
+    width: 100%;
+    height: auto;
+    clear: both;
+    float: left;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.posicionMenu a {
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--color-f6aecf8);
+    display: inline-block;
+    font-weight: 400;
+    padding: 10px 30px;
+    position: relative;
+    border: 2px solid var(--color-f6aecf8);
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(202, 36, 36, 0.3);
+}
+
+.posicionMenu a:hover {
+    background-color: var(--color-5f0d913);
+    color: var(--color-473552c8);
+    transition: background 0.6s ease-in;
+}
+

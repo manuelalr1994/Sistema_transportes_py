@@ -1,0 +1,18 @@
+{% for captura in lista_capturas %}
+<tr>
+    <td>{{ captura.codigo }}</td>
+    <td>{{ captura.nombre }}</td>
+    <td>{{ captura.horas }}</td>
+    <td>{{ captura.martes }}</td>
+    <td>{{ captura.miercoles }}</td>
+    <td>{{ captura.jueves }}</td>
+    <td>{{ captura.viernes }}</td>
+    <td>{{ captura.sabado }}</td>
+    <td>{{ captura.domingo }}</td>
+    <td>{{ captura.lunes }}</td>
+    <td>{{ captura.sub_total }}</td>
+    <td>{{ captura.diesel }}0</td>
+    <td>{{ captura.comida }}0</td>
+    <td>{{ captura.total }}</td>
+</tr>
+{% endfor %}

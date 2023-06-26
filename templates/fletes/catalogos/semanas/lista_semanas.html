@@ -1,0 +1,44 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Lista de semanas {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+    <section class="listas">
+        <div class="listas_recientes">
+            <div class="encabezado_listas disable-select">
+                <section class="ubicacion">
+                    <div>
+                        <label>Hermosillo</label>
+                    </div>
+                </section>
+                <h2 class="titulo">Lista de Semanas</h2>
+                <div class="seleccion_ch">
+                    <a href="{% url 'fletes:catalogos:semanas:registrar' %}" class="btn seleccion_ch add disable-select">Agregar</a>
+                </div>
+            </div>
+            <div class="overflow">
+                <table class="tabla_listas_ch">
+                <thead>
+                    <tr>
+                        <th>Tipo de Semana</th>
+                        <th>Dias</th>
+                    </tr>
+                </thead>
+                {% for tipo_semana in lista_tipos_semana %}
+                    <tr onclick='location.href="{% url "fletes:catalogos:semanas:consultar" pk=tipo_semana.tipo %}"'>
+                        <td>{{ tipo_semana.tipo }}</td>
+                        <td>{{ tipo_semana.nombre }}</td>
+                    </tr>      
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- Section -->
+
+{% endblock contenido %}

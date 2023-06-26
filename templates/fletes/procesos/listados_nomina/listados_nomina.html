@@ -1,0 +1,228 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Modificación de captura fletera {% endblock titulo %}
+{% block contenido %}
+
+<!-- Pagina de listas e impresion -->
+
+<section class="listas">
+<div class="listas_recientes">
+<div class="encabezado_listas" id="var_encabezado"> 
+        <h2 class="titulo" id="var_titulo">Listado semanal de camiones</h2>
+    </div>
+    <div class="contenedorRegistro_empleados">
+        <form id="formulario_bitacora" method="post" action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+            <div class="panel panel_default panelModCamiones">
+                <div class="modCamiones">
+                    <b>Campo Agricola:</b>{{ form.campo_agricola }}
+                    <b>Tipo Semana:</b> <select id="tipo_semana" class="form_control" required>
+                        <option value="">---selecciona tipo semana---</option>
+                    </select>
+                </div>
+                <div class="modCamiones">
+                    <b>Semana:</b> <select id="semana" class="form_control elementoUno" required>
+                        <option value="">---selecciona semana---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="containerImprimir">
+                    <div  class="imprimir colorImprimir">
+                        <input id="reporte_listado_camiones" class="imprimirInput" type="button" value="Imprimir listado">
+                    </div>
+                </div>
+                <div class="containerImprimir">
+                    <div class="imprimir colorImprimirVar">
+                        <input type="button" id="listado_excel" value="Exportar Excel">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel_default fontSize">
+                <div class="panel_body">
+                    <div class="grupo_formulario roll"> 
+                        <div class="overflow_mod_cam">
+                        <table id="tabla_fechas" class="tab_mod_camiones">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Horas</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Sub Total</th>
+                                    <th>Diésel</th>
+                                    <th>Comidas</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contenido_tabla_capturas">
+                                <tr>
+                                    <td>00102</td>
+                                    <td>Internacional blanco</td>
+                                    <td>54.25</td>
+                                    <td>9.25</td>
+                                    <td>8.25</td>
+                                    <td>6.00</td>
+                                    <td>8.75</td>
+                                    <td>8.75</td>
+                                    <td>6.50</td>
+                                    <td>6.75</td>
+                                    <td>8,951.25</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>8,951.25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="error"></div>
+    </div>
+</div>
+</section>
+
+
+
+<!------------------ JAVASCRIPT --------------------->
+
+<script src="../../../../static/js/modal.js"></script>
+<script src="../../../../static/js/funciones.js"></script>
+<script src="{% static 'js/decimal.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        
+        // AJAX request del modulo de modificacion
+        $("#campo_agricola").change(function () {
+            var empresa_id = $(this).val();
+
+            if (empresa_id.length > 0){
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarTipoSemana' %}",
+                    data: {
+                        'empresa': empresa_id
+                    },
+                    success: function (data) {
+                        $("#tipo_semana").html(data);
+                    }
+                });
+            }
+            else {
+                $("#tipo_semana").html('<option value="">---selecciona tipo semana---</option>');
+            }
+        });
+
+
+        $("#tipo_semana").change(function () {
+            var tipo_semana_id = $(this).val();
+
+            if (tipo_semana_id.length > 0){
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:cargarSemana' %}",
+                    data: {
+                        'tipo_semana': tipo_semana_id
+                    },
+                    success: function (data) {
+                        $("#semana").html(data);
+                    }
+                });
+            }
+            else {
+                $("#semana").html('<option value="">---selecciona semana---</option>');
+            }
+
+        });
+
+
+        $('#campo_agricola, #tipo_semana, #semana').change(function() {
+            var empresa_id = $('#campo_agricola').val()
+            var tipo_semana_id = $('#tipo_semana').val()
+            var semana_id = $('#semana').val()
+
+            if(empresa_id.length > 0 && tipo_semana_id.length > 0 && semana_id.length > 0){
+                $.ajax({ 
+                    url: "{% url 'fletes:procesos:listados_nomina:cargarListaNomina' %}",
+                    data: {
+                        'empresa' : empresa_id,
+                        'tipo_semana' : tipo_semana_id,
+                        'semana' : semana_id
+                    },
+                    success: function (data) {
+                        $('#contenido_tabla_capturas').html(data)
+                    }
+                });
+            }
+
+        })
+
+
+        // ---------------------------- REPORTES --------------------------------
+        $('#reporte_listado_camiones').click( function(){
+
+            empresa_id = $('#campo_agricola').val()
+            tipo_semana_id = $('#tipo_semana').val()
+            semana_id = $('#semana').val()
+
+            if(empresa_id.length > 0 && tipo_semana_id.length > 0 && semana_id.length > 0){
+                
+                window.open("{% url 'fletes:procesos:listados_nomina:reporteListadoCamiones'%}"+"?empresa="+empresa_id
+                            +"&tipo_semana="+tipo_semana_id+"&semana="+semana_id)
+
+            }else {
+
+                if(!empresa_id.length > 0){
+                    alert("Debe seleccionar un campo agricola")
+                }
+                else if(!tipo_semana_id.length > 0){
+                    alert("Debe seleccionar un tipo semana")
+                }
+                else if(!semana_id.length > 0){
+                    alert("Debe seleccionar un numero de semana")
+                }
+
+            }
+
+        });
+
+
+        $('#listado_excel').click( function(){
+
+            empresa_id = $('#campo_agricola').val()
+            tipo_semana_id = $('#tipo_semana').val()
+            semana_id = $('#semana').val()
+
+            if(empresa_id.length > 0 && tipo_semana_id.length > 0 && semana_id.length > 0){
+                
+                window.open("{% url 'fletes:procesos:listados_nomina:reporteListadoExcel'%}"+"?campo_agricola="+empresa_id
+                            +"&tipo_semana="+tipo_semana_id+"&semana="+semana_id)
+
+            }else {
+
+                if(!empresa_id.length > 0){
+                    alert("Debe seleccionar un campo agricola")
+                }
+                else if(!tipo_semana_id.length > 0){
+                    alert("Debe seleccionar un tipo semana")
+                }
+                else if(!semana_id.length > 0){
+                    alert("Debe seleccionar un numero de semana")
+                }
+
+            }
+
+        });
+        
+
+    })
+</script>
+{% endblock contenido %}

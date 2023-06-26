@@ -1,0 +1,143 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Cierre de semana {% endblock titulo %}
+{% block contenido %}
+
+<section class="listas">
+    <div class="listas_recientes">
+    <div class="encabezado_listas" id="var_encabezado"> 
+            <h2 class="titulo" id="var_titulo">Cierre de semana</h2>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <div class="panel panel_default fontSize">
+                <div class="panel_heading">
+                    <h2>Datos de la semana</h2>
+                </div>
+                <div class="panel_body">
+                    <div class="grupo_formulario roll">
+                        <div class="var_colum_input">
+                            <label>Campo Agricola:</label>
+                            {{ form.campo_agricola }}
+                        </div>
+                        <div class="var_colum_input">
+                            <label>Tipo de semana:</label>
+                            <select id="tipo_semana" class="form_control" required>
+                                <option value="">---Selecciona tipo de semana---</option>
+                            </select>
+                        </div>
+                        <div class="var_colum_input">
+                            <label>N° de semana:</label>
+                            <select id="semana" class="form_control" required>
+                                <option value="">---Selecciona numero de semana---</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <input type="button" id="boton_submit" class="btn seleccion save disable-select" value="Guardar">
+            </div>
+        </div>
+    </div>
+    </section>
+<!-- Section -->
+
+
+<!------------------------------------------------------------JAVASCRIPT--------------------------------------------------------------->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+
+        $("#campo_agricola").change( function() {
+
+            campo_agricola = $("#campo_agricola").val()
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarTipoSemana' %}",
+                data: {
+                    'empresa': campo_agricola
+                },
+                success: function (data) {
+                    $("#tipo_semana").html(data);
+                }
+            });
+
+        });
+
+
+        $("#tipo_semana").change( function(){
+
+            tipo_semana = $("#tipo_semana").val()
+            $.ajax({
+                url: "{% url 'fletes:procesos:capturas_fleteras:cargarSemana' %}",
+                data: {
+                    'tipo_semana': tipo_semana
+                },
+                success: function (data) {
+                    $("#semana").html(data);
+                }
+            });
+
+        });
+
+
+        $("#semana, #tipo_semana, #campo_agricola").change( function(){
+
+            semana = $("#semana").val()
+            tipo_semana = $("#tipo_semana").val()
+            campo_agricola = $("#campo_agricola").val()
+
+            if(semana.length > 0 && tipo_semana.length > 0 && campo_agricola.length > 0){
+                $.ajax({
+                    url: "{% url 'fletes:procesos:capturas_fleteras:verificarSemanaCerrada' %}",
+                    data: {
+                        'campo_agricola' : campo_agricola,
+                        'tipo_semana' : tipo_semana,
+                        'semana' : semana
+                    },
+                    success: function (data) {
+                        console.log("TUVE EXITO EN LA SEMANA CERRADA AJAX")
+                        if(data['semana_cerrada']){
+                            console.log("TUVE EXITO EN PASAR EL IF DE SEMANA CERRADA AJAX")
+                            alert(data['mensaje_semana_cerrada']) 
+                        }
+                    },
+                    error: function(){
+                        alert("Hubo un error en el servidor")
+                    },
+                });
+            }
+
+        });
+
+
+        $('#boton_submit').click( function(){
+
+            campo_agricola = $("#campo_agricola").val()
+            tipo_semana = $("#tipo_semana").val()
+            semana = $("#semana").val()
+
+            $.ajax({
+                method: "POST",
+                url: "{% url 'fletes:utilerias:cierre_semanas:cierre' %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'campo_agricola' : campo_agricola,
+                    'tipo_semana' : tipo_semana,
+                    'semana' : semana
+                },
+                success: function (data) {
+                    alert(data['mensaje_exito'])
+                },
+                error: function () {
+                    $("#error").html('<p style="color: red;">Hubo un error en el servidor</p>')
+                }
+            });
+
+        })
+
+    });
+
+</script>
+
+{% endblock contenido %}

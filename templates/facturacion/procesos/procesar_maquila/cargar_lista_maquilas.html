@@ -1,0 +1,41 @@
+
+{% for maquila in lista_maquilas %}
+    
+    <tr>
+        <td>{{ maquila.semana.semana }}</td>
+        <td>{{ maquila.semana.fecha_inicial }}</td>
+        <td>{{ maquila.cant_carros }}</td>
+        <td>{{ maquila.hrs_fletes }}</td>
+        
+        
+        {% if maquila.procesada %}
+
+            <td>{{ maquila.costo_maquila }}</td>
+            <td>{{ maquila.importe_maquila }}</td>
+        
+            <td>
+                <input type="button" value="Ver" class="paddingMaq colorVerde" maquila="{{ maquila.pk }}">
+            </td>
+            <td>
+                <input type="button" value="Concentrado" class="paddingMaq colorGris" maquila="{{ maquila.pk }}">
+            </td>
+
+        {% else %}
+
+            <td> -------- </td>
+            <td> -------- </td>
+
+            <td>
+                <input type="button" value="Generar" class="paddingMaq colorRojo" id="abrirModal" maquila="{{ maquila.pk }}">
+            </td>
+            <td>
+                <input type="button" value="Concentrado" class="paddingMaq colorAzul" maquila="{{ maquila.pk }}">
+            </td>
+
+        {% endif %}
+        
+    </tr>
+
+{% endfor %}
+    
+    

@@ -1,0 +1,53 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas disable-select">
+            <section class="ubicacion">
+                <div>
+                    <label>Hermosillo</label>
+                </div>
+            </section>
+            <h2 class="titulo">Lista de Empleados</h2>
+            <div class="seleccion_ch">
+                <a href="{% url 'nomina:catalogos:empleados:registrar' %}" class="btn seleccion_ch add disable-select">Agregar</a>
+            </div>
+        </div>
+        {%include 'home/conmon/input_buscar.html' %}
+        {%include 'home/conmon/checkBox.html' %}
+
+        <div class="overflow">
+            <table class="tabla_listas_ch">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Cuadrillero</th>
+                        <th>Estatus</th>
+                        <th>Curp</th>
+                        <th>No.Tarjeta</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for empleado in lista_empleados %}
+                    <tr onclick='location.href="{% url "nomina:catalogos:empleados:consulta" pk=empleado.id %}"'>
+                        <td>{{ empleado.codigo }}</td>
+                        <td>{{ empleado.nombres }} {{ empleado.paterno }} {{ empleado.materno }}</td>
+                        <td>{{ empleado.tipo_contrato }}</td>
+                        <td>{{ empleado.cuadrillero }}</td>
+                        <td>{{ empleado.estatus }}</td>
+                        <td>{{ empleado.curp }}</td>
+                        <td>{{ empleado.num_tarjeta }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </section> 
+
+{% endblock contenido %}

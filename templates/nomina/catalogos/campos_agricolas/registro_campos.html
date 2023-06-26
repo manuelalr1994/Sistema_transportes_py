@@ -1,0 +1,71 @@
+{% extends 'home/home_nomina.html' %}
+{% load static %}
+{% block titulo %} Registro de campos {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">    
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Campo Agricola</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'nomina:catalogos:campos:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">  
+            <div class="contenedorRegistro_empleados">
+                <form method="POST">{% csrf_token %}
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Datos del Campo agricola</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Codigo</label>
+                                    <input class="form_control" type="number" value="{{ codigo_actual }}" disabled>
+                                </div>
+                                <div class="colum_input">
+                                    <label>Nombre de Campo</label>
+                                    {{ form.nombre }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h3>Sistema de pago</h3>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario roll">
+                                <div class="colum_input">
+                                    <label>Tipos de Semana</label>
+                                    {{ form.tipos_semana }}
+                                </div>
+                                <div class="colum_input">
+                                    <label>Costo Hora Extra</label>
+                                    {{ form.costo_hra_extra }}
+                                </div>
+                                <div class="colum_input checkboxImprimir">
+                                    <label>Descuento Sindical</label>
+                                    {{ form.descuento_sindical }}
+                                </div>
+                                <div class="colum_input">
+                                    <p>Semana 1: Martes - Lunes</p>
+                                    <p>Semana 2: Domingo - Sabado</p>
+                                    <p>Semana 3: Viernes - Jueves</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%include 'home/conmon/btnGuardar.html' %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+
+{% endblock contenido %}

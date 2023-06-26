@@ -1,0 +1,149 @@
+{% extends 'home/home_facturacion.html' %}
+{% load static %}
+
+{% block titulo %} Remision estado de cuenta{% endblock titulo %}
+
+{% block contenido %}
+
+<div class="modalContainer">
+    <div class="modal modal2 modalClose"> 
+        <p class="close marginClose" id="closeModal">X</p>
+        <img src="" alt="">
+        <div class="modalTextos">
+            <div class="contenedorRegistro_empleados">
+                <form>
+                    <div class="panel panel_default">
+                        <div class="panel_heading">
+                            <h2>Generar proceso de maquila</h2>
+                        </div>
+                        <div class="panel_body">
+                            <div class="grupo_formulario">
+                                <div class="colum_input varWidth">
+                                    <label>Ubicación:</label>
+                                    <input class="form_control varDisplay modFormControl" type="text" value="Empacador staines, (monica)" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Semana:</label>
+                                    <input class="form_control varDisplay modFormControl" type="number" value="17" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Cantidad de carros:</label>
+                                    <input class="form_control varDisplay modFormControl" type="number" value="52" disabled>
+                                </div>
+                            
+                                <div class="colum_input varWidth">
+                                    <label>Horas Fletes:</label>
+                                    <input class="form_control varDisplay modFormControl" type="text" value="3,1371.25" disabled>
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Costo Maquila:</label>
+                                    <b class="fontSizeMid">$</b> <input class="form_control varDisplay" type="text">
+                                </div>
+                                <div class="colum_input varWidth">
+                                    <label>Importe maquila:</label>
+                                    <b class="fontSizeMid">$</b> <input class="form_control varDisplay" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botones">
+                        <input type="button" id="guardar_captura" class="btn seleccion_ch save disable-select" value="Generar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<section class="listas">
+    <div class="listas_recientes">
+    <div class="encabezado_listas" id="var_encabezado"> 
+            <h2 class="titulo" id="var_titulo">Estado de cuenta remision</h2>
+        </div>
+        <div class="contenedorRegistro_empleados">
+            <form id="formulario_bitacora" method="post" action="{% url 'fletes:procesos:capturas_fleteras:reporteBitacora' %}">{% csrf_token %}
+                <div class="panel panel_default panelModCamiones">
+                    <div class="modCamiones">
+                        <b>Empresa:</b> <select id="tipo_semana" class="form_control" required>
+                            <option value="">---selecciona tipo semana---</option>
+                        </select>
+                    </div>
+                    <div class="modCamiones">
+                        <b>Desde:</b> <select id="semana" class="form_control elementoUno" required>
+                            <option value="">---selecciona semana---</option> 
+                        </select>
+                        <b>Hasta:</b> <select id="semana" class="form_control elementoUno" required>
+                            <option value="">---selecciona semana---</option> 
+                        </select>
+                    </div>
+                </div>
+    
+                <div>
+                    <div class="containerImprimir">
+                        <div  class="imprimir colorImprimir">
+                            <input id="reporte_listado_camiones" class="imprimirInput" type="button" value="Generar remisión">
+                        </div>
+                    </div>
+                    <div class="containerImprimir">
+                        <div class="imprimir colorImprimirVar">
+                            <input type="button" id="reporte_bitacora" value="Imprimir listado">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="panel panel_default fontSize">
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll"> 
+                            <div class="overflow_mod_cam">
+                            <table id="tabla_fechas" class="tab_mod_camiones">
+                                <thead>
+                                    <tr>
+                                        <th>Cncepto</th>
+                                        <th>N° Semana</th>
+                                        <th>Semanas</th>
+                                        <th>Remision</th>
+                                        <th>Fecha</th>
+                                        <th>Horas fletes</th>
+                                        <th>Costo maquila</th>
+                                        <th>Importe maquila</th>
+                                        <th>Abonos</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td><b>REMISIÓN</b></td> <td class="bgBlue"></td> <td></td> <td>100012</td> <td>24/01/2022</td> <td></td> <td></td> <td class="bgLight"></td> <td class="bgBlue">
+                                        $ 585,000.00
+                                        <b></b>
+                                    </td> <td></td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+                                    <tr> <td>Maquila</td> <td class="bgBlue">1</td> <td>28/12/2021 - 03/01/2022</td> <td></td> <td></td> <td>856.00</td> <td>270.00</td> <td class="bgLight">231,120.00</td> <td class="bgBlue"></td> <td>$ 231,120.00</td> </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    </section>
+
+
+<script src="../../../../static/js/modal.js"></script>
+
+{% endblock contenido %}

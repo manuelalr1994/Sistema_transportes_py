@@ -1,0 +1,50 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Lista de camiones {% endblock titulo %}
+{% block contenido %}
+<!-- Section -->
+    <section class="listas">
+        <div class="listas_recientes">
+            <div class="encabezado_listas disable-select">
+                <section class="ubicacion">
+                    <div>
+                        <label>Hermosillo</label>
+                    </div>
+                </section>
+                <h2 class="titulo">Lista de Camiones</h2>
+                <div class="seleccion_ch">
+                    <a href="{% url 'fletes:catalogos:camiones:registrar' %}" class="btn seleccion_ch add disable-select">Agregar</a>
+                </div>
+            </div>
+            {%include 'home/conmon/input_buscar.html' %}
+           
+            {%include 'home/conmon/checkBox.html' %}
+            <div class="overflow">
+                <table class="tabla_listas_ch">
+                <thead>
+                    <tr class="disable-select">
+                        <th>Codigo</th>
+                        <th>Compañia Fletera</th>
+                        <th>Alias</th>
+                        <th>Compañia Fletera</th>
+                    </tr>
+                </thead>
+                
+                
+                {% for camion in lista_camiones %}
+                    <tr onclick='location.href="{% url "fletes:catalogos:camiones:consultar" pk=camion.codigo %}"'>
+                        <td>{{ camion.codigo }}</td>
+                        <td>{{ camion.nombre }}</td>
+                        <td>{{ camion.alias }}</td>
+                        <td>{{ camion.compania_fletera }}</td>
+                    </tr>
+                {% endfor %}
+                
+                </table>
+            </div>
+        </div>
+    </section>
+
+<!-- Section -->
+
+{% endblock contenido %}

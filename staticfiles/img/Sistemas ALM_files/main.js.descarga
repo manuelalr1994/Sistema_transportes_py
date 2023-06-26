@@ -1,0 +1,4 @@
+let $empresa = document.getElementById (`empresa`);
+let $tipo_semana = document.getElementById (`tipo_semana`);
+let $semana = document.getElementById (`semana`);
+let $campo = docume.getElementById (`campo`);

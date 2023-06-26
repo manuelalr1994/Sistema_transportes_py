@@ -1,0 +1,63 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Lista de cuadrilla/apuntador {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+    <section class="listas">
+        <div class="listas_recientes">
+            <div class="encabezado_listas disable-select">
+                <section class="ubicacion">
+                    <div>
+                        <label>Hermosillo</label>
+                    </div>
+                </section>
+                <h2 class="titulo">Lista de Cuadrilleros</h2>
+                <div class="seleccion_ch">
+                    <a href="{% url "fletes:catalogos:cuadrilleros:registrar" %}" class="btn seleccion_ch add disable-select">Agregar</a>
+                </div>
+            </div>
+            {%include 'home/conmon/input_buscar.html' %}
+            {%include 'home/conmon/checkBox.html' %}
+            <div class="overflow">
+                <table class="tabla_listas_ch">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Campo Agricola</th>
+                            <th>Tipos Semana</th>
+                        </tr>
+                    </thead>
+                        
+                    <tbody>
+                        {% for cuadrillero in lista_cuadrilleros %}
+                        <tr onclick='location.href="{% url "fletes:catalogos:cuadrilleros:consultar" pk=cuadrillero.codigo %}"'>
+                            <td> {{ cuadrillero.codigo }} </td>
+                            <td> {{ cuadrillero.nombre }} </td>
+                            <td> {{ cuadrillero.campo_agricola.nombre }} </td>
+                            <td> 
+                                [
+                                {% for tipo in cuadrillero.campo_agricola.tipos_semana.all %}
+
+                                    {% if forloop.last %}
+                                        {{ tipo.tipo }}
+                                    {% else %}
+                                        {{ tipo.tipo }}, 
+                                    {% endif %}
+
+                                {% endfor %}
+                                ]
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Section -->
+
+{% endblock contenido %}

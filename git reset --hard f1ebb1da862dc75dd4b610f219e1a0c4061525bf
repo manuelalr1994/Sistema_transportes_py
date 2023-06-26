@@ -1,0 +1,270 @@
+[33mcommit 02fc60f88424c9c7955d1f50593956e05ceeed8d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: c59da47 26a3039
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Fri Apr 29 20:07:34 2022 -0700
+
+    Merge branch 'master' of https://github.com/VictorVazquez512/SistemaGSMO
+
+[33mcommit c59da4755188de997fd6f572655f0cf853ae6fa1[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Fri Apr 29 20:07:26 2022 -0700
+
+    prueba
+
+[33mcommit 26a303914b15234d36fc181d06838ae9e31f371e[m
+Merge: b15a978 f1ebb1d
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Fri Apr 29 19:10:41 2022 -0700
+
+    commit 2
+
+[33mcommit b15a9789e0c46cae2a362b760cbb5ea27d16b5f2[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Fri Apr 29 19:07:04 2022 -0700
+
+    modificacion en home fletes
+
+[33mcommit f1ebb1da862dc75dd4b610f219e1a0c4061525bf[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Fri Apr 29 17:16:54 2022 -0700
+
+    arreglo errores capturas fleteras
+
+[33mcommit d5fd45f38263fb3121574678291e30eb000bce0c[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Wed Apr 20 10:57:21 2022 -0700
+
+    Subida
+
+[33mcommit cafd95857fee5f25dae5af610e8ab1da5ee2e875[m
+Merge: 361924d 0a52508
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Wed Apr 20 10:56:44 2022 -0700
+
+    prueba
+
+[33mcommit 361924dcb9d4576f06c43526cac4ddc7cd43ea3f[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Wed Apr 20 10:54:54 2022 -0700
+
+    prueba
+
+[33mcommit 35a31f55e77f4d214ba5127b619f667bb3b83488[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Wed Apr 20 10:49:49 2022 -0700
+
+    Cambios minimos
+
+[33mcommit 0a5250819ef4422a37f667a990c7bae87bbb7e80[m
+Merge: e27785e 3bfe12f
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 19 19:04:06 2022 -0700
+
+    Merge branch 'master' of https://github.com/VictorVazquez512/SistemaGSMO_2
+
+[33mcommit e27785e6d5aa9c9dfcb3a13bdc76f7d8c52e57c0[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 19 19:03:59 2022 -0700
+
+    Completado capturas a base de datos
+
+[33mcommit 3bfe12f5adb0a37cac62d9ca0586bd0e607c5684[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 19 17:32:55 2022 -0700
+
+    Cambios de imagen
+
+[33mcommit c28cce496afbc41c3c5eb362bd8c51df6e0f274f[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 19 12:17:09 2022 -0700
+
+    Modulado de buscador
+
+[33mcommit 8562a5b99093d4fcd3dba2685d6c49cc00a9685c[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 18 16:51:04 2022 -0700
+
+    Prueba 2
+
+[33mcommit 3bcb761885836ca7973bff4fff1dd8a238b2f82f[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 18 16:49:34 2022 -0700
+
+    Prueba 1
+
+[33mcommit 2499624cf4562858e005006f1bad970b7839fd17[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 18 16:45:34 2022 -0700
+
+    Prueba
+
+[33mcommit 47f1c164032e7c26bdd9f3c2b0d7253095ccb624[m
+Merge: 46dedbc b1929cd
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 18 14:47:53 2022 -0700
+
+    Agregando botones
+
+[33mcommit 46dedbc4129dafe0ad97463d9e303fdb8371a4a7[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 18 14:43:02 2022 -0700
+
+    Agregando botones a todos los html
+
+[33mcommit b1929cd92ce35d377785330c1ecfa01de4b7b826[m
+Author: [VictorVazquez512] <[victorhugo.vazquezrojas@gmail.com]>
+Date:   Mon Apr 18 14:35:27 2022 -0700
+
+    Inicio de la creacion del POST de Capturas Fletera
+
+[33mcommit db03199c8c81e0131523dd754ebd97eb1c64e351[m
+Merge: a9a3237 984637b
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Fri Apr 15 12:18:43 2022 -0700
+
+    Merge branch 'master' of https://github.com/VictorVazquez512/SistemaGSMO_2
+
+[33mcommit a9a323731334dce57492dbded85e93740d4f6473[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Fri Apr 15 12:18:28 2022 -0700
+
+    Cambios en el registro capturas fleteras (separacion horas-minutos en la operacion)
+
+[33mcommit 984637b80d26c04ecb37e63e1851422310f353ec[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Wed Apr 13 17:08:48 2022 -0700
+
+    Cambio de colores y arreglo de botones de guardado
+
+[33mcommit e1c7a96ac6e2af1195b1ef2f2c3a0bdd38632314[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 17:31:40 2022 -0700
+
+    agregaron btnes, disable-select, f-lc
+
+[33mcommit f1166e5bdb984e47eccf3357a060519cdeeeb009[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 16:11:49 2022 -0700
+
+    Prueba 11
+
+[33mcommit 86b0dbedc9fe93fc78e4f5af1071b2ce3c270580[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 16:10:46 2022 -0700
+
+    Prueba 10
+
+[33mcommit f5088fd196bae4375d94c55de4830d8ec327868e[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 16:09:09 2022 -0700
+
+    Prueba 9
+
+[33mcommit 8f591e209961cca12b8c6d9e9d06cb7bd292571c[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 16:03:02 2022 -0700
+
+    Prueba8
+
+[33mcommit 6318b230d41d66ba1e6c84b7dc6b55752e1765e5[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 16:02:52 2022 -0700
+
+    prueba8
+
+[33mcommit a4fb27853febadaadd661f3413f1c04ca329e482[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 16:01:57 2022 -0700
+
+    Prueba 7
+
+[33mcommit f51a4239627e86a05d077e65af3626b5cb981ab1[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 15:59:59 2022 -0700
+
+    Prueba 5
+
+[33mcommit c6c9a8cdbe1ccafd631ff5d3ce06f3c284d62b53[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 15:54:47 2022 -0700
+
+    prueba 6
+
+[33mcommit 778fe217115d5a08e991d6a739088883b2dfc593[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 15:49:01 2022 -0700
+
+    Prueba 5
+
+[33mcommit 23a0968be9f2cf1c06f03ec686ac06f4b36090ab[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 15:34:26 2022 -0700
+
+    Prueba 4
+
+[33mcommit d328372c52f11bcc1a361df57afdfab1b7cf74fc[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 15:34:04 2022 -0700
+
+    Prueba 3
+
+[33mcommit 81b91c7f564ede96ef868cc038039366830a9835[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 15:27:45 2022 -0700
+
+    Prueba 2
+
+[33mcommit c165fc529ba18b6373139544131d991ee66db891[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 15:26:24 2022 -0700
+
+    Prueba 2
+
+[33mcommit 5275d78ee2368c20ec465864243c3a562ab95075[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 15:15:12 2022 -0700
+
+    Prueba de cambios
+
+[33mcommit 3faa5213e3337f7f8927768b541ac685d46ec7b4[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 14:40:02 2022 -0700
+
+    Subir 170 archivos
+
+[33mcommit caaed3a54b065e98290fd4538ca7c862bbb05e80[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 14:38:11 2022 -0700
+
+    Verde mas oscuro
+
+[33mcommit b5f1cb200fbffbb8498dba65086e070c1fbc6b73[m
+Merge: 1574996 b9d8718
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 14:09:47 2022 -0700
+
+    Merge branch 'master' of https://github.com/VictorVazquez512/SistemaGSMO_2
+
+[33mcommit 15749964f3bcaef6829ca4822ff7f2fb4679d15c[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Tue Apr 12 14:09:30 2022 -0700
+
+    Prueba sobre captura
+
+[33mcommit b9d8718c9fd0761c4d32bbd1f96d1c766f60e235[m[33m ([m[1;31morigin/eros_modificaciones[m[33m)[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Tue Apr 12 14:07:55 2022 -0700
+
+    Primer arreglo de errores
+
+[33mcommit d494962281802273f01af5902663dea511b4e690[m
+Author: erosleon9@gmail.com <erosleon9@gmial.com>
+Date:   Mon Apr 11 19:16:23 2022 -0700
+
+    Cambio de colores
+
+[33mcommit 8293af54f50ef37519104214ae513747615c67a5[m
+Author: victorhugo.vazquezrojas@gmail.com <victorhugo.vazquezrojas@gmail.com>
+Date:   Mon Apr 11 16:35:16 2022 -0700
+
+    first commit

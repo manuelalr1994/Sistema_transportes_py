@@ -1,0 +1,83 @@
+{% extends 'home/home_fletes.html' %}
+{% load static %}
+{% block titulo %} Consulta de compañía fletera {% endblock titulo %}
+{% block contenido %}
+
+<!-- Section -->
+
+<section class="listas">
+    <div class="listas_recientes">
+        <div class="encabezado_listas" id="var_encabezado">
+            <h2 class="titulo" id="var_titulo">Registro de Compañia Fletera</h2>
+        </div>
+        <div class="control_back_botton">
+            <a class="btn seleccion_ch back disable-select" href="{% url 'fletes:catalogos:compania_fletera:lista' %}">Retornar</a>
+        </div>
+        <div class="overflow">  
+            <div class="contenedorRegistro_empleados">
+                <div class="panel panel_default">
+                    <div class="panel_heading">
+                        <h3>Datos del Compañia Fletera</h3>
+                    </div>
+                    <div class="panel_body">
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Codigo</label>
+                                <input type="number" class="form_control" value="{{ object.codigo }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>Cuenta</label>
+                                <input type="text" class="form_control" placeholder="Escriba la cuenta" value="{{ object.cuenta }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>Tarjeta</label>
+                                <input type="number" class="form_control" placeholder="Escriba la tarjeta" value="{{ object.tarjeta }}" disabled>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Nombre</label>
+                                <input type="text" class="form_control" placeholder="Escriba el nombre" value="{{ object.nombre }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>RFC</label>
+                                <input type="text" class="form_control" placeholder="Escriba el RFC" value="{{ object.rfc }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>Direccion</label>
+                                <input type="text" class="form_control" placeholder="Escriba la direccion" value="{{ object.direccion }}" disabled>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            
+                            <div class="colum_input">
+                                <label>Estado</label>
+                                <input type="text" class="form_control" placeholder="Escriba la ciudad " value="{{ object.estado }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>Ciudad</label>
+                                <input type="text" class="form_control" placeholder="Escriba la ciudad " value="{{ object.ciudad }}" disabled>
+                            </div>
+                            <div class="colum_input">
+                                <label>Colonia</label>
+                                <input type="text" class="form_control" placeholder="Escriba la colonia" value="{{ object.colonia }}" disabled>
+                            </div>
+                        </div>
+                        <div class="grupo_formulario roll">
+                            <div class="colum_input">
+                                <label>Codigo Postal</label>
+                                <input type="number" class="form_control" placeholder="Escriba el codigo postal" value="{{ object.codigo_postal }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%include 'home/conmon/btnMasEditar.html' %}
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+
+{% endblock contenido %}
